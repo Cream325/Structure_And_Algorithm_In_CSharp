@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Structure_And_Algorithm.Structure.LinkedList
 {
-    public class SinglyLinkedList : AbstractLinkedList
+    public class CircularLinkedList : AbstractLinkedList
     {
-        public SinglyLinkedList() { }
+        public CircularLinkedList() { }
 
         public override void Append(object newData)
         {
@@ -22,44 +22,64 @@ namespace Structure_And_Algorithm.Structure.LinkedList
             else
             {
                 TailNode.NextNode = newNode;
+                newNode.PreviousNode = TailNode;
                 TailNode = TailNode.NextNode;
             }
 
+            HeadNode.PreviousNode = TailNode;
+            TailNode.NextNode = HeadNode;
             Length++;
         }
 
         public override void Insert(object newData, int index)
         {
             LinkedListNode newNode = new(newData);
-            LinkedListNode currentNode = Search(index - 1);
+            LinkedListNode currentNode = Search(index);
 
-            if(HeadNode == null || index >= Length)
+            if (HeadNode == null || index >= Length)
             {
                 Append(newData);
                 return;
             }
-
-            if(index == 0)
-            {
-                newNode.NextNode = currentNode;
-                HeadNode = newNode;
-            }
             else
             {
-                newNode.NextNode = currentNode.NextNode;
-                currentNode.NextNode = newNode;
+                newNode.NextNode = currentNode;
+
+                if (index == 0)
+                {
+                    currentNode.PreviousNode = newNode;
+                    HeadNode = newNode;
+                }
+                else
+                {
+                    currentNode.PreviousNode.NextNode = newNode;
+                    newNode.PreviousNode = currentNode.PreviousNode;
+                    currentNode.PreviousNode = newNode;
+                }
             }
 
+            HeadNode.PreviousNode = TailNode;
+            TailNode.NextNode = HeadNode;
             Length++;
         }
 
         public override LinkedListNode? Search(int index)
         {
-            LinkedListNode? currentNode = HeadNode;
+            LinkedListNode currentNode = (index <= (Length / 2)) ? HeadNode : TailNode;
 
-            while((currentNode.NextNode != null) && (--index) >= 0)
+            if(currentNode == HeadNode)
             {
-                currentNode = currentNode.NextNode;
+                while((--index) >= 0)
+                {
+                    currentNode = currentNode.NextNode;
+                }
+            }
+            else
+            {
+                while((++index) <= (Length - 1))
+                {
+                    currentNode = currentNode.PreviousNode;
+                }
             }
 
             return currentNode;
@@ -75,17 +95,19 @@ namespace Structure_And_Algorithm.Structure.LinkedList
             {
                 HeadNode = currentNode.NextNode;
                 deletedNode = currentNode;
+
+                if(Length != 1)
+                {
+                    HeadNode.PreviousNode = TailNode;
+                    TailNode.NextNode = HeadNode;
+                }
             }
             else
             {
                 LinkedListNode tempNode = currentNode.NextNode;
-                currentNode.NextNode = tempNode.NextNode;
 
-                if (index >= (Length - 1))
-                {
-                    TailNode = currentNode;
-                }
-
+                tempNode.PreviousNode.NextNode = tempNode.NextNode;
+                tempNode.NextNode.PreviousNode = tempNode.PreviousNode;
                 deletedNode = tempNode;
             }
 
@@ -97,11 +119,11 @@ namespace Structure_And_Algorithm.Structure.LinkedList
         {
             LinkedListNode currentNode = HeadNode;
 
-            while(currentNode != null)
+            do
             {
                 Console.Write(currentNode.Data + " ");
                 currentNode = currentNode.NextNode;
-            }
+            } while (currentNode != HeadNode);
 
             Console.WriteLine();
         }

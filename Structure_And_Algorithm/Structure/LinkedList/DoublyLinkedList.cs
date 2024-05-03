@@ -84,6 +84,7 @@ namespace Structure_And_Algorithm.Structure.LinkedList
 
         public override LinkedListNode? Delete(int index)
         {
+            index = index <= (Length - 1) ? index : (Length - 1);
             LinkedListNode deletedNode = null;
             LinkedListNode currentNode = Search(index - 1);
 
@@ -102,6 +103,11 @@ namespace Structure_And_Algorithm.Structure.LinkedList
                     tempNode.NextNode.PreviousNode = currentNode;
                 }
 
+                if (index >= (Length - 1))
+                {
+                    TailNode = currentNode;
+                }
+
                 deletedNode = tempNode;
             }
 
@@ -118,6 +124,8 @@ namespace Structure_And_Algorithm.Structure.LinkedList
                 Console.Write(currentNode.Data + " ");
                 currentNode = currentNode.NextNode;
             }
+
+            Console.WriteLine();
         }
     }
 }
