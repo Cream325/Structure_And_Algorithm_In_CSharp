@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Structure_And_Algorithm.Structure.LinkedList
+namespace Structure_And_Algorithm.Structure.Nodes
 {
     public class LinkedListNode : Node
     {
@@ -18,9 +18,6 @@ namespace Structure_And_Algorithm.Structure.LinkedList
         public LinkedListNode PreviousNode { get => previousNode; set => previousNode = value; }
         #endregion
 
-        public LinkedListNode(object? data)
-        {
-            Data = data;
-        }
+        public LinkedListNode(object data) : base(data) { }
     }
 }

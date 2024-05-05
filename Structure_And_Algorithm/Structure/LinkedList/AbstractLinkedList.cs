@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Structure_And_Algorithm.Structure.Nodes;
 
 namespace Structure_And_Algorithm.Structure.LinkedList
 {
@@ -44,7 +45,7 @@ namespace Structure_And_Algorithm.Structure.LinkedList
         /// 링크드 리스트 - 단일 검색
         /// </summary>
         /// <param name="index"></param>
-        public abstract LinkedListNode? Search(int index);
+        public abstract Node? Search(int index);
         #endregion
 
         #region Delete
@@ -52,7 +53,7 @@ namespace Structure_And_Algorithm.Structure.LinkedList
         /// 링크드 리스트 - 단일 삭제
         /// </summary>
         /// <param name="index"></param>
-        public abstract LinkedListNode? Delete(int index);
+        public abstract Node? Delete(int index);
         #endregion
 
         #region Print

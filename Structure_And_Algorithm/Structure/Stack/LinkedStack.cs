@@ -1,4 +1,5 @@
 ﻿using Structure_And_Algorithm.Structure.LinkedList;
+using Structure_And_Algorithm.Structure.Nodes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,11 @@ namespace Structure_And_Algorithm.Structure.Stack
             Append(newData);
         }
 
-        public object? Peek()
+        public Node? Peek()
         {
             if(!IsEmpty())
             {
-                return Search(Length - 1).Data;
+                return Search(Length - 1);
             }
             else
             {
@@ -26,7 +27,7 @@ namespace Structure_And_Algorithm.Structure.Stack
             }
         }
 
-        public object? Pop()
+        public Node? Pop()
         {
             if (!IsEmpty())
             {

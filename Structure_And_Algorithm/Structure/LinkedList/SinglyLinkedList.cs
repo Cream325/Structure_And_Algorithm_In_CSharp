@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Structure_And_Algorithm.Structure.Nodes;
 
 namespace Structure_And_Algorithm.Structure.LinkedList
 {
@@ -29,7 +30,7 @@ namespace Structure_And_Algorithm.Structure.LinkedList
         public override void Insert(object newData, int index)
         {
             LinkedListNode newNode = new(newData);
-            LinkedListNode currentNode = Search(index - 1);
+            LinkedListNode currentNode = (LinkedListNode)Search(index - 1);
 
             if(HeadNode == null || index >= Length)
             {
@@ -51,7 +52,7 @@ namespace Structure_And_Algorithm.Structure.LinkedList
             Length++;
         }
 
-        public override LinkedListNode? Search(int index)
+        public override Node? Search(int index)
         {
             LinkedListNode? currentNode = HeadNode;
 
@@ -63,11 +64,11 @@ namespace Structure_And_Algorithm.Structure.LinkedList
             return currentNode;
         }
 
-        public override LinkedListNode? Delete(int index)
+        public override Node? Delete(int index)
         {
             index = index <= (Length - 1) ? index : (Length - 1);
             LinkedListNode? deletedNode = null;
-            LinkedListNode currentNode = Search(index - 1);
+            LinkedListNode currentNode = (LinkedListNode)Search(index - 1);
 
             if(index == 0)
             {
