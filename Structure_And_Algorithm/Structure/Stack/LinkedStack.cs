@@ -9,18 +9,16 @@ namespace Structure_And_Algorithm.Structure.Stack
 {
     public class LinkedStack : DoublyLinkedList, AbstractStack
     {
-        public LinkedStack() { }
-
         public void Push(object newData)
         {
-            base.Append(newData);
+            Append(newData);
         }
 
         public object? Peek()
         {
             if(!IsEmpty())
             {
-                return base.Search(Length - 1).Data;
+                return Search(Length - 1).Data;
             }
             else
             {
@@ -32,7 +30,7 @@ namespace Structure_And_Algorithm.Structure.Stack
         {
             if (!IsEmpty())
             {
-                return base.Delete(Length - 1).Data;
+                return Delete(Length - 1);
             }
             else
             {

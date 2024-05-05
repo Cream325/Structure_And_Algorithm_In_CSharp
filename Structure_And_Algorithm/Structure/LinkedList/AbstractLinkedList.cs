@@ -8,8 +8,6 @@ namespace Structure_And_Algorithm.Structure.LinkedList
 {
     public abstract class AbstractLinkedList
     {
-        public AbstractLinkedList() { }
-
         #region Member Fields
         private LinkedListNode headNode;
         private LinkedListNode tailNode;

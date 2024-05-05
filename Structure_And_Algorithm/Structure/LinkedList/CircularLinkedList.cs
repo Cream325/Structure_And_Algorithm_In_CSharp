@@ -8,8 +8,6 @@ namespace Structure_And_Algorithm.Structure.LinkedList
 {
     public class CircularLinkedList : AbstractLinkedList
     {
-        public CircularLinkedList() { }
-
         public override void Append(object newData)
         {
             LinkedListNode newNode = new(newData);

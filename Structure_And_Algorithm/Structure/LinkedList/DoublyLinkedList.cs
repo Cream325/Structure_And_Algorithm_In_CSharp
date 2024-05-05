@@ -8,8 +8,6 @@ namespace Structure_And_Algorithm.Structure.LinkedList
 {
     public class DoublyLinkedList : AbstractLinkedList
     {
-        public DoublyLinkedList() { }
-
         public override void Append(object newData)
         {
             LinkedListNode newNode = new(newData);

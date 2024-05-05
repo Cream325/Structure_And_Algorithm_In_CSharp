@@ -6,15 +6,32 @@ using System.Threading.Tasks;
 
 namespace Structure_And_Algorithm.Structure.Stack
 {
-    public class ArrayStack : StackNode, AbstractStack
+    public class ArrayStack : AbstractStack
     {
-        public ArrayStack(int capacity) : base(capacity) { }
+        #region Member Fields
+        private StackNode[] array;
+        private int top = -1;
+        private int capacity;
+        #endregion
+
+        #region Properties
+        protected StackNode[] Array { get => array; set => array = value; }
+        protected int Top { get => top; set => top = value; }
+        public int Capacity { get => capacity; }
+        #endregion
+
+        public ArrayStack(int capacity)
+        {
+            this.capacity = capacity;
+            array = new StackNode[capacity];
+        }
 
         public void Push(object newData)
         {
             if (!IsFull())
             {
-                Array[++Top] = newData;
+                StackNode newNode = new(newData);
+                Array[++Top] = newNode;
             }
             else
             {

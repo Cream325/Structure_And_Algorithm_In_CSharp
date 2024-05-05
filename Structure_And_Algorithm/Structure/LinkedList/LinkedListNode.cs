@@ -8,11 +8,6 @@ namespace Structure_And_Algorithm.Structure.LinkedList
 {
     public class LinkedListNode : Node
     {
-        public LinkedListNode(object? data)
-        {
-            Data = data;
-        }
-
         #region Member Fields
         private LinkedListNode nextNode;
         private LinkedListNode previousNode;
@@ -22,5 +17,10 @@ namespace Structure_And_Algorithm.Structure.LinkedList
         public LinkedListNode NextNode { get => nextNode; set => nextNode = value; }
         public LinkedListNode PreviousNode { get => previousNode; set => previousNode = value; }
         #endregion
+
+        public LinkedListNode(object? data)
+        {
+            Data = data;
+        }
     }
 }

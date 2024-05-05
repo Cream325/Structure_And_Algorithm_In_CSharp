@@ -8,8 +8,6 @@ namespace Structure_And_Algorithm.Structure.LinkedList
 {
     public class SinglyLinkedList : AbstractLinkedList
     {
-        public SinglyLinkedList() { }
-
         public override void Append(object newData)
         {
             LinkedListNode newNode = new(newData);
