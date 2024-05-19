@@ -19,8 +19,7 @@ namespace Structure_And_Algorithm.Structure.Queue
         {
             if(!IsEmpty())
             {
-                Node dequeuedNode = Delete(0);
-                return dequeuedNode;
+                return Delete(0);
             }
             else
             {
