@@ -30,6 +30,30 @@ namespace Structure_And_Algorithm.Structure.LinkedList
             Length++;
         }
 
+        public override void AppendAll(object[] newDatas)
+        {
+            for (int i = 0; i < newDatas.Length; i++)
+            {
+                LinkedListNode newNode = new(newDatas[i]);
+
+                if (HeadNode == null)
+                {
+                    HeadNode = newNode;
+                    TailNode = HeadNode;
+                }
+                else
+                {
+                    TailNode.NextNode = newNode;
+                    newNode.PreviousNode = TailNode;
+                    TailNode = TailNode.NextNode;
+                }
+            }
+
+            HeadNode.PreviousNode = TailNode;
+            TailNode.NextNode = HeadNode;
+            Length += newDatas.Length;
+        }
+
         public override void Insert(object newData, int index)
         {
             LinkedListNode newNode = new(newData);

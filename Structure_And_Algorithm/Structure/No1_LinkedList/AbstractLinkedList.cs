@@ -29,6 +29,12 @@ namespace Structure_And_Algorithm.Structure.LinkedList
         /// </summary>
         /// <param name="newData"></param>
         public abstract void Append(object newData);
+
+        /// <summary>
+        /// 링크드 리스트 - 전체 추가
+        /// </summary>
+        /// <param name="newDatas"></param>
+        public abstract void AppendAll(object[] newDatas);
         #endregion
 
         #region Insert

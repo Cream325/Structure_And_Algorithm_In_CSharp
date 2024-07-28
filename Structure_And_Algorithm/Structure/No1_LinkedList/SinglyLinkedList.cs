@@ -9,6 +9,7 @@ namespace Structure_And_Algorithm.Structure.LinkedList
 {
     public class SinglyLinkedList : AbstractLinkedList
     {
+        #region Append
         public override void Append(object newData)
         {
             LinkedListNode newNode = new(newData);
@@ -27,31 +28,57 @@ namespace Structure_And_Algorithm.Structure.LinkedList
             Length++;
         }
 
+        public override void AppendAll(object[] newDatas)
+        {
+            for(int i = 0; i <  newDatas.Length; i++)
+            {
+                LinkedListNode newNode = new(newDatas[i]);
+
+                if (HeadNode == null)
+                {
+                    HeadNode = newNode;
+                    TailNode = HeadNode;
+                }
+                else
+                {
+                    TailNode.NextNode = newNode;
+                    TailNode = TailNode.NextNode;
+                }
+            }
+
+            Length += newDatas.Length;
+        }
+        #endregion
+
+        #region Insert
         public override void Insert(object newData, int index)
         {
-            LinkedListNode newNode = new(newData);
-            LinkedListNode currentNode = (LinkedListNode)Search(index - 1);
-
             if(HeadNode == null || index >= Length)
             {
                 Append(newData);
-                return;
-            }
-
-            if(index == 0)
-            {
-                newNode.NextNode = currentNode;
-                HeadNode = newNode;
             }
             else
             {
-                newNode.NextNode = currentNode.NextNode;
-                currentNode.NextNode = newNode;
+                LinkedListNode newNode = new(newData);
+                if (index == 0)
+                {
+                    newNode.NextNode = HeadNode;
+                    HeadNode = newNode;
+                }
+                else
+                {
+                    LinkedListNode currentNode = (LinkedListNode)Search(index - 1);
+
+                    newNode.NextNode = currentNode.NextNode;
+                    currentNode.NextNode = newNode;
+                }
             }
 
             Length++;
         }
+        #endregion
 
+        #region Search
         public override Node? Search(int index)
         {
             LinkedListNode? currentNode = HeadNode;
@@ -63,7 +90,9 @@ namespace Structure_And_Algorithm.Structure.LinkedList
 
             return currentNode;
         }
+        #endregion
 
+        #region Delete
         public override Node? Delete(int index)
         {
             index = index <= (Length - 1) ? index : (Length - 1);
@@ -91,18 +120,21 @@ namespace Structure_And_Algorithm.Structure.LinkedList
             Length--;
             return deletedNode;
         }
+        #endregion
 
+        #region Print
         public override void Traversal()
         {
             LinkedListNode currentNode = HeadNode;
 
             while(currentNode != null)
             {
-                Console.Write(currentNode.Data + " ");
+                Console.Write($"{currentNode.Data} ");
                 currentNode = currentNode.NextNode;
             }
 
             Console.WriteLine();
         }
+        #endregion
     }
 }
