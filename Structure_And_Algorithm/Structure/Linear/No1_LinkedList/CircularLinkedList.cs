@@ -7,6 +7,10 @@ using Structure_And_Algorithm.Structure.Nodes;
 
 namespace Structure_And_Algorithm.Structure.Linear.LinkedList
 {
+    /// <summary>
+    /// 순환 링크드 리스트
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class CircularLinkedList<T> : AbstractLinkedList<T>
     {
         #region Constructors
@@ -14,6 +18,9 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         public CircularLinkedList(T? data) : base(data) { }
         #endregion
 
+        #region Overrides
+
+        #region Append
         public override void Append(T newData)
         {
             CustomLinkedListNode<T> newNode = new(newData);
@@ -58,7 +65,9 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
             TailNode.NextNode = HeadNode;
             Length += newDatas.Length;
         }
+        #endregion
 
+        #region Insert
         public override void Insert(T newData, int index)
         {
             if (HeadNode == null || Length <= index)
@@ -90,7 +99,9 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
             TailNode.NextNode = HeadNode;
             Length++;
         }
+        #endregion
 
+        #region Search
         public override CustomLinkedListNode<T>? Search(int index)
         {
             CustomLinkedListNode<T>? currentNode = index <= Length / 2 ? HeadNode : TailNode;
@@ -115,7 +126,9 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
 
             return currentNode;
         }
+        #endregion
 
+        #region Delete
         public override CustomLinkedListNode<T>? Delete(int index)
         {
             index = index <= Length - 1 ? index : Length - 1;
@@ -145,7 +158,9 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
             Length--;
             return deletedNode;
         }
+        #endregion
 
+        #region Print
         public override void Traversal()
         {
             CustomLinkedListNode<T>? currentNode = HeadNode;
@@ -161,5 +176,8 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
 
             Console.WriteLine();
         }
+        #endregion
+
+        #endregion
     }
 }

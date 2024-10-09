@@ -7,76 +7,35 @@ using System.Threading.Tasks;
 
 namespace Structure_And_Algorithm.Structure.Linear.Deque
 {
+    /// <summary>
+    /// 셸프(출력제한 덱)
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Shelf<T> : AbstractDeque<T>
     {
         #region Member Fields
-        private CustomLinkedListNode<T>[] array;
         private int front = 0;
         private int back = 0;
         private int capacity;
+        private CustomLinkedListNode<T>[] array;
         #endregion
 
+        #region Properties
         public int Capacity { get => capacity; }
+        #endregion
 
+        #region Constructors
         public Shelf(int capacity)
         {
             this.capacity = capacity;
             array = new CustomLinkedListNode<T>[capacity + 1];
         }
-
-        #region Push
-        private void PushFront(T newData)
-        {
-            if (!IsFull())
-            {
-                int position = 0;
-                CustomLinkedListNode<T> newNode = new(newData);
-
-                if (front == capacity)
-                {
-                    position = front;
-                    front = 0;
-                }
-                else
-                {
-                    position = front++;
-                }
-
-                array[position] = newNode;
-            }
-            else
-            {
-                throw new IndexOutOfRangeException();
-            }
-        }
-
-        private void PushBack(T newData)
-        {
-            if (!IsFull())
-            {
-                int position = 0;
-                CustomLinkedListNode<T> newNode = new(newData);
-
-                if (back == 0)
-                {
-                    position = back;
-                    back = capacity;
-                }
-                else
-                {
-                    position = back--;
-                }
-
-                array[position] = newNode;
-            }
-            else
-            {
-                throw new IndexOutOfRangeException();
-            }
-        }
         #endregion
 
-        public void Push(T newData, IOType type)
+        #region Overrides
+
+        #region Push
+        public void Push(T? newData, IOType type)
         {
             if (type == IOType.Front)
             {
@@ -88,15 +47,65 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
             }
         }
 
+        private void PushFront(T? newData)
+        {
+            if (!IsFull())
+            {
+                int position = 0;
+
+                if (front == capacity)
+                {
+                    position = front;
+                    front = 0;
+                }
+                else
+                {
+                    position = front++;
+                }
+
+                array[position] = new CustomLinkedListNode<T>(newData);
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
+        }
+
+        private void PushBack(T? newData)
+        {
+            if (!IsFull())
+            {
+                int position = 0;
+
+                if (back == 0)
+                {
+                    position = back;
+                    back = capacity;
+                }
+                else
+                {
+                    position = back--;
+                }
+
+                array[position] = new CustomLinkedListNode<T>(newData);
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
+        }
+        #endregion
+
         public CustomLinkedListNode<T>? Pop(IOType type = IOType.Back)
         {
             if (!IsEmpty())
             {
-                if (back == capacity) { back = 0; }
+                if (back == capacity)
+                {
+                    back = 0;
+                }
 
-                int position = back++;
-
-                return array[position];
+                return array[back++];
             }
             else
             {
@@ -120,5 +129,6 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
 
             return front % capacity == back && index == front;
         }
+        #endregion
     }
 }

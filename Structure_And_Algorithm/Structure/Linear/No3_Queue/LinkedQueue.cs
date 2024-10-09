@@ -8,9 +8,23 @@ using System.Threading.Tasks;
 
 namespace Structure_And_Algorithm.Structure.Linear.Queue
 {
+    /// <summary>
+    /// 링크드 리스트 기반 큐
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class LinkedQueue<T> : DoublyLinkedList<T>, AbstractQueue<T>
     {
-        public void Enqueue(T newData)
+        #region Constructors
+        public LinkedQueue() { }
+
+        public LinkedQueue(T? data)
+        {
+            Enqueue(data);
+        }
+        #endregion
+
+        #region Overrides
+        public void Enqueue(T? newData)
         {
             Append(newData);
         }
@@ -27,6 +41,10 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
             }
         }
 
-        public bool IsEmpty() { return Length == 0; }
+        public bool IsEmpty()
+        {
+            return Length == 0;
+        }
+        #endregion
     }
 }

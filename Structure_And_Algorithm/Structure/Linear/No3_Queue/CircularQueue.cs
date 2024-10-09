@@ -7,13 +7,17 @@ using System.Threading.Tasks;
 
 namespace Structure_And_Algorithm.Structure.Linear.Queue
 {
+    /// <summary>
+    /// 순환 큐
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class CircularQueue<T> : AbstractQueue<T>
     {
         #region Member Fields
-        private CustomLinkedListNode<T>[] array;
         private int front = 0;
         private int rear = 0;
         private int capacity;
+        private CustomLinkedListNode<T>[] array;
         #endregion
 
         #region Properties
@@ -22,28 +26,28 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
         public int Capacity { get => capacity; }
         #endregion
 
+        #region Constructors
         public CircularQueue(int capacity)
         {
             this.capacity = capacity;
             array = new CustomLinkedListNode<T>[capacity + 1];
         }
+        #endregion
 
-        public void Enqueue(T newData)
+        #region Overrides
+        public void Enqueue(T? newData)
         {
             if (!IsFull())
             {
-                int position = 0;
-                CustomLinkedListNode<T> newNode = new(newData);
-
                 if (rear == capacity)
                 {
                     rear = 0;
                 }
 
-                position = rear;
+                int position = rear;
                 rear++;
 
-                array[position] = newNode;
+                array[position] = new CustomLinkedListNode<T>(newData);
             }
             else
             {
@@ -67,18 +71,22 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
             return array[position];
         }
 
-        public bool IsEmpty() { return front == rear; }
+        public bool IsEmpty()
+        {
+            return front == rear;
+        }
 
         public bool IsFull()
         {
             if (front < rear)
             {
-                return rear - front == capacity;
+                return (rear - front) == capacity;
             }
             else
             {
-                return rear + 1 == front;
+                return (rear + 1) == front;
             }
         }
+        #endregion
     }
 }

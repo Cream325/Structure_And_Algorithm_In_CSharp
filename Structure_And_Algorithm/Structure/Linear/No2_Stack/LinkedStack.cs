@@ -8,9 +8,22 @@ using System.Threading.Tasks;
 
 namespace Structure_And_Algorithm.Structure.Linear.Stack
 {
+    /// <summary>
+    /// 링크드 리스트 기반 스택
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class LinkedStack<T> : DoublyLinkedList<T>, AbstractStack<T>
     {
-        public void Push(T newData)
+        #region Constructors
+        public LinkedStack() { }
+        public LinkedStack(T? data)
+        {
+            Push(data);
+        }
+        #endregion
+
+        #region Overrides
+        public void Push(T? newData)
         {
             Append(newData);
         }
@@ -40,5 +53,6 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
         }
 
         public bool IsEmpty() { return Length == 0; }
+        #endregion
     }
 }

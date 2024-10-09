@@ -7,63 +7,37 @@ using System.Threading.Tasks;
 
 namespace Structure_And_Algorithm.Structure.Linear.Deque
 {
+    /// <summary>
+    /// 스크롤(입력제한 덱)
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Scroll<T> : AbstractDeque<T>
     {
         #region Member Fields
-        private CustomLinkedListNode<T>[] array;
         private int front = 0;
         private int back = 0;
         private int capacity;
+        private CustomLinkedListNode<T>[] array;
         #endregion
 
+        #region Properties
         public int Capacity { get => capacity; }
+        #endregion
 
+        #region Constructors
         public Scroll(int capacity)
         {
             this.capacity = capacity;
             array = new CustomLinkedListNode<T>[capacity + 1];
         }
-
-        #region Pop
-        private CustomLinkedListNode<T>? PopFront()
-        {
-            if (!IsEmpty())
-            {
-                if (front == 0) { front = capacity; }
-
-                int position = --front;
-
-                return array[position];
-            }
-            else
-            {
-                throw new IndexOutOfRangeException();
-            }
-        }
-
-        private CustomLinkedListNode<T>? PopBack()
-        {
-            if (!IsEmpty())
-            {
-                if (back == capacity) { back = 0; }
-
-                int position = back++;
-
-                return array[position];
-            }
-            else
-            {
-                throw new IndexOutOfRangeException();
-            }
-        }
         #endregion
 
-        public void Push(T newData, IOType type = IOType.Front)
+        #region Overrides
+        public void Push(T? newData, IOType type = IOType.Front)
         {
             if (!IsFull())
             {
                 int position = 0;
-                CustomLinkedListNode<T> newNode = new(newData);
 
                 if (front == capacity)
                 {
@@ -75,7 +49,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
                     position = front++;
                 }
 
-                array[position] = newNode;
+                array[position] = new CustomLinkedListNode<T>(newData);
             }
             else
             {
@@ -83,6 +57,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
             }
         }
 
+        #region Pop
         public CustomLinkedListNode<T>? Pop(IOType type)
         {
             if (type == IOType.Front)
@@ -94,6 +69,41 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
                 return PopBack();
             }
         }
+
+        private CustomLinkedListNode<T>? PopFront()
+        {
+            if (!IsEmpty())
+            {
+                if (front == 0)
+                {
+                    front = capacity;
+                }
+
+                return array[--front];
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
+        }
+
+        private CustomLinkedListNode<T>? PopBack()
+        {
+            if (!IsEmpty())
+            {
+                if (back == capacity)
+                {
+                    back = 0;
+                }
+
+                return array[back++];
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
+        }
+        #endregion
 
         public bool IsEmpty()
         {
@@ -111,5 +121,6 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
 
             return front % capacity == back && index == front;
         }
+        #endregion
     }
 }

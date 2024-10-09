@@ -8,9 +8,24 @@ using System.Threading.Tasks;
 
 namespace Structure_And_Algorithm.Structure.Linear.Deque
 {
+    /// <summary>
+    /// 링크드 리스트 기반 덱
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class LinkedDeque<T> : DoublyLinkedList<T>, AbstractDeque<T>
     {
-        public void Push(T newData, IOType type)
+        #region Constructors
+        public LinkedDeque() { }
+        public LinkedDeque(T? data, IOType type)
+        {
+            Push(data, type);
+        }
+        #endregion
+
+        #region Overrides
+
+        #region Push
+        public void Push(T? newData, IOType type)
         {
             if (type == IOType.Front)
             {
@@ -22,16 +37,18 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
             }
         }
 
-        private void PushFront(T newData)
+        private void PushFront(T? newData)
         {
             Insert(newData, 0);
         }
 
-        private void PushBack(T newData)
+        private void PushBack(T? newData)
         {
             Append(newData);
         }
+        #endregion
 
+        #region Pop
         public CustomLinkedListNode<T>? Pop(IOType type)
         {
             if (type == IOType.Front)
@@ -67,6 +84,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
                 return null;
             }
         }
+        #endregion
 
         public CustomLinkedListNode<T>? Front()
         {
@@ -96,5 +114,6 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
         {
             return Length == 0;
         }
+        #endregion
     }
 }

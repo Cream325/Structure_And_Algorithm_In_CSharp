@@ -3,6 +3,10 @@ using Structure_And_Algorithm.Structure.Nodes;
 
 namespace Structure_And_Algorithm.Structure.Linear.LinkedList
 {
+    /// <summary>
+    /// 링크드 리스트 추상 클래스
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public abstract class AbstractLinkedList<T>
     {
         #region Member Fields
@@ -26,7 +30,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         }
         #endregion
 
-        #region Abstract Methods
+        #region Abstract Functions
 
         #region Append
         /// <summary>

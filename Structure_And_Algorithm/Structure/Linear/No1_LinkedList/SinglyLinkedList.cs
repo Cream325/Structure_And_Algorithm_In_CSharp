@@ -6,12 +6,18 @@ using Structure_And_Algorithm.Structure.Nodes;
 
 namespace Structure_And_Algorithm.Structure.Linear.LinkedList
 {
+    /// <summary>
+    /// 단일 링크드 리스트
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class SinglyLinkedList<T> : AbstractLinkedList<T>
     {
         #region Constructors
         public SinglyLinkedList() : base() { }
         public SinglyLinkedList(T? data) : base(data) { }
         #endregion
+
+        #region Overrides
 
         #region Append
         public override void Append(T newData)
@@ -146,6 +152,8 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
 
             Console.WriteLine();
         }
+        #endregion
+
         #endregion
     }
 }
