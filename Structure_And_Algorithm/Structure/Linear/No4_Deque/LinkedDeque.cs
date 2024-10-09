@@ -1,4 +1,4 @@
-﻿using Structure_And_Algorithm.Structure.LinkedList;
+﻿using Structure_And_Algorithm.Structure.Linear.LinkedList;
 using Structure_And_Algorithm.Structure.Nodes;
 using System;
 using System.Collections.Generic;
@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Structure_And_Algorithm.Structure.Deque
+namespace Structure_And_Algorithm.Structure.Linear.Deque
 {
-    public class LinkedDeque : DoublyLinkedList, AbstractDeque
+    public class LinkedDeque<T> : DoublyLinkedList<T>, AbstractDeque<T>
     {
-        public void Push(object newData, IOType type)
+        public void Push(T newData, IOType type)
         {
-            if(type == IOType.Front)
+            if (type == IOType.Front)
             {
                 PushFront(newData);
             }
@@ -22,17 +22,17 @@ namespace Structure_And_Algorithm.Structure.Deque
             }
         }
 
-        private void PushFront(object newData)
+        private void PushFront(T newData)
         {
             Insert(newData, 0);
         }
 
-        private void PushBack(object newData)
+        private void PushBack(T newData)
         {
             Append(newData);
         }
 
-        public Node? Pop(IOType type)
+        public CustomLinkedListNode<T>? Pop(IOType type)
         {
             if (type == IOType.Front)
             {
@@ -44,7 +44,7 @@ namespace Structure_And_Algorithm.Structure.Deque
             }
         }
 
-        private Node? PopFront()
+        private CustomLinkedListNode<T>? PopFront()
         {
             if (!IsEmpty())
             {
@@ -56,7 +56,7 @@ namespace Structure_And_Algorithm.Structure.Deque
             }
         }
 
-        private Node? PopBack()
+        private CustomLinkedListNode<T>? PopBack()
         {
             if (!IsEmpty())
             {
@@ -68,7 +68,7 @@ namespace Structure_And_Algorithm.Structure.Deque
             }
         }
 
-        public Node? Front()
+        public CustomLinkedListNode<T>? Front()
         {
             if (!IsEmpty())
             {
@@ -80,7 +80,7 @@ namespace Structure_And_Algorithm.Structure.Deque
             }
         }
 
-        public Node? Back()
+        public CustomLinkedListNode<T>? Back()
         {
             if (!IsEmpty())
             {
@@ -94,7 +94,7 @@ namespace Structure_And_Algorithm.Structure.Deque
 
         public bool IsEmpty()
         {
-            return (Length == 0);
+            return Length == 0;
         }
     }
 }

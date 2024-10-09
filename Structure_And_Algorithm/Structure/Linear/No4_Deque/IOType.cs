@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Structure_And_Algorithm.Structure.Deque
+namespace Structure_And_Algorithm.Structure.Linear.Deque
 {
     public enum IOType
     {

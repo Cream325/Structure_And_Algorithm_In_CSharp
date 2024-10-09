@@ -1,24 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Structure_And_Algorithm.Structure.Nodes;
 
-namespace Structure_And_Algorithm.Structure.LinkedList
+namespace Structure_And_Algorithm.Structure.Linear.LinkedList
 {
-    public abstract class AbstractLinkedList
+    public abstract class AbstractLinkedList<T>
     {
         #region Member Fields
-        private LinkedListNode headNode;
-        private LinkedListNode tailNode;
+        private CustomLinkedListNode<T>? headNode = null;
+        private CustomLinkedListNode<T>? tailNode = null;
         private int length = 0;
         #endregion
 
         #region Properties
-        public LinkedListNode HeadNode { get => headNode; set => headNode = value; }
-        public LinkedListNode TailNode { get => tailNode; set => tailNode = value; }
+        public CustomLinkedListNode<T>? HeadNode { get => headNode; set => headNode = value; }
+        public CustomLinkedListNode<T>? TailNode { get => tailNode; set => tailNode = value; }
         public int Length { get => length; set => length = value; }
+        #endregion
+
+        #region Constructors
+        public AbstractLinkedList() { }
+
+        public AbstractLinkedList(T? data)
+        {
+            Append(data);
+        }
         #endregion
 
         #region Abstract Methods
@@ -28,13 +33,13 @@ namespace Structure_And_Algorithm.Structure.LinkedList
         /// 링크드 리스트 - 단일 추가
         /// </summary>
         /// <param name="newData"></param>
-        public abstract void Append(object newData);
+        public abstract void Append(T newData);
 
         /// <summary>
         /// 링크드 리스트 - 전체 추가
         /// </summary>
         /// <param name="newDatas"></param>
-        public abstract void AppendAll(object[] newDatas);
+        public abstract void AppendAll(T[] newDatas);
         #endregion
 
         #region Insert
@@ -43,7 +48,7 @@ namespace Structure_And_Algorithm.Structure.LinkedList
         /// </summary>
         /// <param name="newData"></param>
         /// <param name="index"></param>
-        public abstract void Insert(object newData, int index);
+        public abstract void Insert(T newData, int index);
         #endregion
 
         #region Search
@@ -51,7 +56,7 @@ namespace Structure_And_Algorithm.Structure.LinkedList
         /// 링크드 리스트 - 단일 검색
         /// </summary>
         /// <param name="index"></param>
-        public abstract Node? Search(int index);
+        public abstract CustomLinkedListNode<T>? Search(int index);
         #endregion
 
         #region Delete
@@ -59,7 +64,7 @@ namespace Structure_And_Algorithm.Structure.LinkedList
         /// 링크드 리스트 - 단일 삭제
         /// </summary>
         /// <param name="index"></param>
-        public abstract Node? Delete(int index);
+        public abstract CustomLinkedListNode<T>? Delete(int index);
         #endregion
 
         #region Print

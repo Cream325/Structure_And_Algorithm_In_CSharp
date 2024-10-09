@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Structure_And_Algorithm.Structure.Deque
+namespace Structure_And_Algorithm.Structure.Linear.Deque
 {
-    public class Scroll : AbstractDeque
+    public class Scroll<T> : AbstractDeque<T>
     {
         #region Member Fields
-        private Node[] array;
+        private CustomLinkedListNode<T>[] array;
         private int front = 0;
         private int back = 0;
         private int capacity;
@@ -21,11 +21,11 @@ namespace Structure_And_Algorithm.Structure.Deque
         public Scroll(int capacity)
         {
             this.capacity = capacity;
-            array = new Node[capacity + 1];
+            array = new CustomLinkedListNode<T>[capacity + 1];
         }
 
         #region Pop
-        private Node? PopFront()
+        private CustomLinkedListNode<T>? PopFront()
         {
             if (!IsEmpty())
             {
@@ -41,7 +41,7 @@ namespace Structure_And_Algorithm.Structure.Deque
             }
         }
 
-        private Node? PopBack()
+        private CustomLinkedListNode<T>? PopBack()
         {
             if (!IsEmpty())
             {
@@ -58,14 +58,14 @@ namespace Structure_And_Algorithm.Structure.Deque
         }
         #endregion
 
-        public void Push(object newData, IOType type = IOType.Front)
+        public void Push(T newData, IOType type = IOType.Front)
         {
-            if(!IsFull())
+            if (!IsFull())
             {
                 int position = 0;
-                Node newNode = new(newData);
+                CustomLinkedListNode<T> newNode = new(newData);
 
-                if(front == capacity)
+                if (front == capacity)
                 {
                     position = front;
                     front = 0;
@@ -83,9 +83,9 @@ namespace Structure_And_Algorithm.Structure.Deque
             }
         }
 
-        public Node? Pop(IOType type)
+        public CustomLinkedListNode<T>? Pop(IOType type)
         {
-            if(type == IOType.Front)
+            if (type == IOType.Front)
             {
                 return PopFront();
             }
@@ -109,7 +109,7 @@ namespace Structure_And_Algorithm.Structure.Deque
                 index = capacity;
             }
 
-            return ((front % capacity) == back) && (index == front);
+            return front % capacity == back && index == front;
         }
     }
 }

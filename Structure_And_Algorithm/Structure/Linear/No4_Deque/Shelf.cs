@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Structure_And_Algorithm.Structure.Deque
+namespace Structure_And_Algorithm.Structure.Linear.Deque
 {
-    public class Shelf : AbstractDeque
+    public class Shelf<T> : AbstractDeque<T>
     {
         #region Member Fields
-        private Node[] array;
+        private CustomLinkedListNode<T>[] array;
         private int front = 0;
         private int back = 0;
         private int capacity;
@@ -21,16 +21,16 @@ namespace Structure_And_Algorithm.Structure.Deque
         public Shelf(int capacity)
         {
             this.capacity = capacity;
-            array = new Node[capacity + 1];
+            array = new CustomLinkedListNode<T>[capacity + 1];
         }
 
         #region Push
-        private void PushFront(object newData)
+        private void PushFront(T newData)
         {
             if (!IsFull())
             {
                 int position = 0;
-                Node newNode = new(newData);
+                CustomLinkedListNode<T> newNode = new(newData);
 
                 if (front == capacity)
                 {
@@ -50,12 +50,12 @@ namespace Structure_And_Algorithm.Structure.Deque
             }
         }
 
-        private void PushBack(object newData)
+        private void PushBack(T newData)
         {
             if (!IsFull())
             {
                 int position = 0;
-                Node newNode = new(newData);
+                CustomLinkedListNode<T> newNode = new(newData);
 
                 if (back == 0)
                 {
@@ -76,7 +76,7 @@ namespace Structure_And_Algorithm.Structure.Deque
         }
         #endregion
 
-        public void Push(object newData, IOType type)
+        public void Push(T newData, IOType type)
         {
             if (type == IOType.Front)
             {
@@ -88,11 +88,11 @@ namespace Structure_And_Algorithm.Structure.Deque
             }
         }
 
-        public Node? Pop(IOType type = IOType.Back)
+        public CustomLinkedListNode<T>? Pop(IOType type = IOType.Back)
         {
             if (!IsEmpty())
             {
-                if(back == capacity) { back = 0; }
+                if (back == capacity) { back = 0; }
 
                 int position = back++;
 
@@ -113,12 +113,12 @@ namespace Structure_And_Algorithm.Structure.Deque
         {
             int index = back - 1;
 
-            if(index == -1)
+            if (index == -1)
             {
                 index = capacity;
             }
 
-            return ((front % capacity) == back) && (index == front);
+            return front % capacity == back && index == front;
         }
     }
 }

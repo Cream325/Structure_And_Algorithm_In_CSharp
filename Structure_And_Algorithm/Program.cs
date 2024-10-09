@@ -1,4 +1,4 @@
-﻿using Structure_And_Algorithm.Structure.LinkedList;
+﻿using Structure_And_Algorithm.Structure.Linear.LinkedList;
 using Structure_And_Algorithm.Structure.Nodes;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace Structure_And_Algorithm
     {
         public static void Main(string[] args)
         {
-            SinglyLinkedList list = new();
+            SinglyLinkedList<object> list = new();
             //Console.WriteLine("Hello World!");
 
             object[] objects = new object[5] { 1, 2, 3, 4, 5 };
@@ -26,7 +26,7 @@ namespace Structure_And_Algorithm
             list.Insert(10, 5);
 
             // 특정 값 검색
-            LinkedListNode searchedNode = (LinkedListNode)list.Search(0);
+            CustomLinkedListNode<object>? searchedNode = list.Search(0);
             Console.WriteLine($"{searchedNode.Data}");
 
             // 특정 값 삭제

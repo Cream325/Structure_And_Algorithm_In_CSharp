@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Structure_And_Algorithm.Structure.Nodes;
 
-namespace Structure_And_Algorithm.Structure.Stack
+namespace Structure_And_Algorithm.Structure.Linear.Stack
 {
-    public class ArrayStack : AbstractStack
+    public class ArrayStack<T> : AbstractStack<T>
     {
         #region Member Fields
-        private Node[] array;
+        private CustomLinkedListNode<T>[] array;
         private int top = -1;
-        private int capacity;
+        private int capacity = 0;
         #endregion
 
         #region Properties
@@ -23,14 +23,14 @@ namespace Structure_And_Algorithm.Structure.Stack
         public ArrayStack(int capacity)
         {
             this.capacity = capacity;
-            array = new Node[capacity];
+            array = new CustomLinkedListNode<T>[capacity];
         }
 
-        public void Push(object newData)
+        public void Push(T newData)
         {
             if (!IsFull())
             {
-                Node newNode = new(newData);
+                CustomLinkedListNode<T> newNode = new(newData);
                 array[++top] = newNode;
             }
             else
@@ -39,7 +39,7 @@ namespace Structure_And_Algorithm.Structure.Stack
             }
         }
 
-        public Node? Peek()
+        public CustomLinkedListNode<T>? Peek()
         {
             if (!IsEmpty())
             {
@@ -51,7 +51,7 @@ namespace Structure_And_Algorithm.Structure.Stack
             }
         }
 
-        public Node? Pop()
+        public CustomLinkedListNode<T>? Pop()
         {
             if (!IsEmpty())
             {
@@ -63,7 +63,7 @@ namespace Structure_And_Algorithm.Structure.Stack
             }
         }
 
-        public bool IsEmpty() { return (top == -1); }
-        public bool IsFull() { return (top > Capacity); }
+        public bool IsEmpty() { return top == -1; }
+        public bool IsFull() { return top > Capacity; }
     }
 }

@@ -5,15 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using Structure_And_Algorithm.Structure.Nodes;
 
-namespace Structure_And_Algorithm.Structure.LinkedList
+namespace Structure_And_Algorithm.Structure.Linear.LinkedList
 {
-    public class CircularLinkedList : AbstractLinkedList
+    public class CircularLinkedList<T> : AbstractLinkedList<T>
     {
-        public override void Append(object newData)
-        {
-            LinkedListNode newNode = new(newData);
+        #region Constructors
+        public CircularLinkedList() : base() { }
+        public CircularLinkedList(T? data) : base(data) { }
+        #endregion
 
-            if(HeadNode == null)
+        public override void Append(T newData)
+        {
+            CustomLinkedListNode<T> newNode = new(newData);
+
+            if (HeadNode == null && TailNode == null)
             {
                 HeadNode = newNode;
                 TailNode = HeadNode;
@@ -30,13 +35,13 @@ namespace Structure_And_Algorithm.Structure.LinkedList
             Length++;
         }
 
-        public override void AppendAll(object[] newDatas)
+        public override void AppendAll(T[] newDatas)
         {
             for (int i = 0; i < newDatas.Length; i++)
             {
-                LinkedListNode newNode = new(newDatas[i]);
+                CustomLinkedListNode<T> newNode = new(newDatas[i]);
 
-                if (HeadNode == null)
+                if (HeadNode == null && TailNode == null)
                 {
                     HeadNode = newNode;
                     TailNode = HeadNode;
@@ -54,18 +59,18 @@ namespace Structure_And_Algorithm.Structure.LinkedList
             Length += newDatas.Length;
         }
 
-        public override void Insert(object newData, int index)
+        public override void Insert(T newData, int index)
         {
-            LinkedListNode newNode = new(newData);
-            LinkedListNode currentNode = (LinkedListNode)Search(index);
-
-            if (HeadNode == null || index >= Length)
+            if (HeadNode == null || Length <= index)
             {
                 Append(newData);
                 return;
             }
             else
             {
+                CustomLinkedListNode<T> newNode = new(newData);
+                CustomLinkedListNode<T>? currentNode = Search(index);
+
                 newNode.NextNode = currentNode;
 
                 if (index == 0)
@@ -86,40 +91,43 @@ namespace Structure_And_Algorithm.Structure.LinkedList
             Length++;
         }
 
-        public override Node? Search(int index)
+        public override CustomLinkedListNode<T>? Search(int index)
         {
-            LinkedListNode currentNode = (index <= (Length / 2)) ? HeadNode : TailNode;
+            CustomLinkedListNode<T>? currentNode = index <= Length / 2 ? HeadNode : TailNode;
 
-            if(currentNode == HeadNode)
+            if (currentNode != null)
             {
-                while((--index) >= 0)
+                if (currentNode == HeadNode)
                 {
-                    currentNode = currentNode.NextNode;
+                    while (--index >= 0)
+                    {
+                        currentNode = currentNode.NextNode;
+                    }
                 }
-            }
-            else
-            {
-                while((++index) <= (Length - 1))
+                else
                 {
-                    currentNode = currentNode.PreviousNode;
+                    while (++index <= Length - 1)
+                    {
+                        currentNode = currentNode.PreviousNode;
+                    }
                 }
             }
 
             return currentNode;
         }
 
-        public override Node? Delete(int index)
+        public override CustomLinkedListNode<T>? Delete(int index)
         {
-            index = index <= (Length - 1) ? index : (Length - 1);
-            LinkedListNode? deletedNode = null;
-            LinkedListNode currentNode = (LinkedListNode)Search(index - 1);
+            index = index <= Length - 1 ? index : Length - 1;
+            CustomLinkedListNode<T>? deletedNode = null;
+            CustomLinkedListNode<T>? currentNode = Search(index - 1);
 
-            if(index == 0)
+            if (index == 0)
             {
                 HeadNode = currentNode.NextNode;
                 deletedNode = currentNode;
 
-                if(Length != 1)
+                if (Length != 1)
                 {
                     HeadNode.PreviousNode = TailNode;
                     TailNode.NextNode = HeadNode;
@@ -127,7 +135,7 @@ namespace Structure_And_Algorithm.Structure.LinkedList
             }
             else
             {
-                LinkedListNode tempNode = currentNode.NextNode;
+                CustomLinkedListNode<T>? tempNode = currentNode.NextNode;
 
                 tempNode.PreviousNode.NextNode = tempNode.NextNode;
                 tempNode.NextNode.PreviousNode = tempNode.PreviousNode;
@@ -140,13 +148,16 @@ namespace Structure_And_Algorithm.Structure.LinkedList
 
         public override void Traversal()
         {
-            LinkedListNode currentNode = HeadNode;
+            CustomLinkedListNode<T>? currentNode = HeadNode;
 
-            do
+            if (currentNode != null)
             {
-                Console.Write(currentNode.Data + " ");
-                currentNode = currentNode.NextNode;
-            } while (currentNode != HeadNode);
+                do
+                {
+                    Console.Write(currentNode.Data + " ");
+                    currentNode = currentNode.NextNode;
+                } while (currentNode != HeadNode);
+            }
 
             Console.WriteLine();
         }

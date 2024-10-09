@@ -1,17 +1,16 @@
 ﻿using Structure_And_Algorithm.Structure.Nodes;
-using Structure_And_Algorithm.Structure.Stack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Structure_And_Algorithm.Structure.Queue
+namespace Structure_And_Algorithm.Structure.Linear.Queue
 {
-    public class CircularQueue : AbstractQueue
+    public class CircularQueue<T> : AbstractQueue<T>
     {
         #region Member Fields
-        private Node[] array;
+        private CustomLinkedListNode<T>[] array;
         private int front = 0;
         private int rear = 0;
         private int capacity;
@@ -26,15 +25,15 @@ namespace Structure_And_Algorithm.Structure.Queue
         public CircularQueue(int capacity)
         {
             this.capacity = capacity;
-            array = new Node[capacity + 1];
+            array = new CustomLinkedListNode<T>[capacity + 1];
         }
 
-        public void Enqueue(object newData)
+        public void Enqueue(T newData)
         {
-            if(!IsFull())
+            if (!IsFull())
             {
                 int position = 0;
-                Node newNode = new(newData);
+                CustomLinkedListNode<T> newNode = new(newData);
 
                 if (rear == capacity)
                 {
@@ -52,11 +51,11 @@ namespace Structure_And_Algorithm.Structure.Queue
             }
         }
 
-        public Node? Dequeue()
+        public CustomLinkedListNode<T>? Dequeue()
         {
             int position = front;
 
-            if(front == capacity)
+            if (front == capacity)
             {
                 front = 0;
             }
@@ -72,13 +71,13 @@ namespace Structure_And_Algorithm.Structure.Queue
 
         public bool IsFull()
         {
-            if(front < rear)
+            if (front < rear)
             {
-                return (rear - front) == capacity;
+                return rear - front == capacity;
             }
             else
             {
-                return (rear + 1) == front;
+                return rear + 1 == front;
             }
         }
     }

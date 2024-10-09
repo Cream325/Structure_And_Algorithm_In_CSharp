@@ -5,18 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Structure_And_Algorithm.Structure.Tree
+namespace Structure_And_Algorithm.Structure.NonLinear.Tree.Basic
 {
-    public abstract class AbstractLCRSTree
+    public abstract class AbstractNTree<T>
     {
-        private TreeNode rootNode;
+        private CustomTreeNode<T>? rootNode;
 
-        public TreeNode RootNode { get => rootNode; set => rootNode = value; }
+        public CustomTreeNode<T>? RootNode { get => rootNode; set => rootNode = value; }
 
         #region Abstract Methods
 
         #region Insert
-        public abstract void Insert(TreeNode parentNode, TreeNode newNode);
+        public abstract void Insert(CustomTreeNode<T> parentNode, CustomTreeNode<T> newNode);
         #endregion
 
         #region Delete

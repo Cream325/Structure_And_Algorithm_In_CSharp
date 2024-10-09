@@ -1,4 +1,4 @@
-﻿using Structure_And_Algorithm.Structure.LinkedList;
+﻿using Structure_And_Algorithm.Structure.Linear.LinkedList;
 using Structure_And_Algorithm.Structure.Nodes;
 using System;
 using System.Collections.Generic;
@@ -6,18 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Structure_And_Algorithm.Structure.Queue
+namespace Structure_And_Algorithm.Structure.Linear.Queue
 {
-    public class LinkedQueue : DoublyLinkedList, AbstractQueue
+    public class LinkedQueue<T> : DoublyLinkedList<T>, AbstractQueue<T>
     {
-        public void Enqueue(object newData)
+        public void Enqueue(T newData)
         {
             Append(newData);
         }
 
-        public Node? Dequeue()
+        public CustomLinkedListNode<T>? Dequeue()
         {
-            if(!IsEmpty())
+            if (!IsEmpty())
             {
                 return Delete(0);
             }
