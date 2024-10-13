@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace Structure_And_Algorithm.Structure.NonLinear.Tree.Basic
 {
-    public class NTree<T> : AbstractNTree<T>
+    public class NTree<T> : AbstractTree<T>
     {
+        #region Constructors
         public NTree(CustomTreeNode<T> rootNode)
         {
             RootNode = rootNode;
         }
+        #endregion
 
+        #region Overrides
         public override void Insert(CustomTreeNode<T> parentNode, CustomTreeNode<T> newNode)
         {
             if (parentNode.LeftNode == null)
@@ -91,5 +94,6 @@ namespace Structure_And_Algorithm.Structure.NonLinear.Tree.Basic
                 }
             }
         }
+        #endregion
     }
 }
