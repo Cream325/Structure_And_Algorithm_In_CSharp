@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 namespace Structure_And_Algorithm.Structure.Linear.Deque
 {
     /// <summary>
-    /// 덱 인터페이스
+    /// 덱 추상 클래스
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface AbstractDeque<T>
+    public abstract class AbstractDeque<T>
     {
         #region Abstract Functions
         /// <summary>
@@ -32,7 +32,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
         /// 덱 - 빈 공간 여부 확인
         /// </summary>
         /// <returns></returns>
-        public bool IsEmpty();
+        public abstract bool IsEmpty();
         #endregion
     }
 }

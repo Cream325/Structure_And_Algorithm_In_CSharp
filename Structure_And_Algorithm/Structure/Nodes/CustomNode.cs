@@ -10,10 +10,16 @@ namespace Structure_And_Algorithm.Structure.Nodes
     {
         #region Member Fields
         private T? data;
+        /// <summary>
+        /// 노드들을 담아둔 리스트
+        /// </summary>
         protected List<CustomNode<T>?> nodeList;
         #endregion
 
         #region Properties
+        /// <summary>
+        /// 노드 데이터
+        /// </summary>
         public T? Data { get => data; set => data = value; }
         #endregion
 

@@ -33,7 +33,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
         #endregion
 
         #region Overrides
-        public void Push(T? newData, IOType type = IOType.Front)
+        public override void Push(T? newData, IOType type = IOType.Front)
         {
             if (!IsFull())
             {
@@ -58,7 +58,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
         }
 
         #region Pop
-        public CustomLinkedListNode<T>? Pop(IOType type)
+        public override CustomLinkedListNode<T>? Pop(IOType type)
         {
             if (type == IOType.Front)
             {
@@ -105,7 +105,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
         }
         #endregion
 
-        public bool IsEmpty()
+        public override bool IsEmpty()
         {
             return front == back;
         }

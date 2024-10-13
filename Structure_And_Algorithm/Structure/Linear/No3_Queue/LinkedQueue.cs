@@ -12,28 +12,36 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
     /// 링크드 리스트 기반 큐
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class LinkedQueue<T> : DoublyLinkedList<T>, AbstractQueue<T>
+    public class LinkedQueue<T> : AbstractQueue<T>
     {
+        #region Member Fields
+        DoublyLinkedList<T> linkedList;
+        #endregion
+
         #region Constructors
-        public LinkedQueue() { }
+        public LinkedQueue()
+        {
+            linkedList = new();
+        }
 
         public LinkedQueue(T? data)
         {
+            linkedList = new();
             Enqueue(data);
         }
         #endregion
 
         #region Overrides
-        public void Enqueue(T? newData)
+        public override void Enqueue(T? newData)
         {
-            Append(newData);
+            linkedList.Append(newData);
         }
 
-        public CustomLinkedListNode<T>? Dequeue()
+        public override CustomLinkedListNode<T>? Dequeue()
         {
             if (!IsEmpty())
             {
-                return Delete(0);
+                return linkedList.Delete(0);
             }
             else
             {
@@ -41,9 +49,9 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
             }
         }
 
-        public bool IsEmpty()
+        public override bool IsEmpty()
         {
-            return Length == 0;
+            return linkedList.Length == 0;
         }
         #endregion
     }

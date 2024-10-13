@@ -8,11 +8,15 @@ using Structure_And_Algorithm.Structure.Nodes;
 namespace Structure_And_Algorithm.Structure.Linear.Stack
 {
     /// <summary>
-    /// 스택 인터페이스
+    /// 스택 추상 클래스
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface AbstractStack<T>
+    public abstract class AbstractStack<T>
     {
+        #region Member Fields
+        protected int top = -1;
+        #endregion
+
         #region Abstract Functions
         /// <summary>
         /// 스택 - 단일 추가
@@ -25,7 +29,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
         /// </summary>
         /// <returns></returns>
         public abstract CustomLinkedListNode<T>? Peek();
-
+        
         /// <summary>
         /// 스택 - 단일 삭제
         /// </summary>

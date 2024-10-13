@@ -16,7 +16,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
         #region Member Fields
         private int front = 0;
         private int rear = 0;
-        private int capacity;
+        private int capacity = 0;
         private CustomLinkedListNode<T>[] array;
         #endregion
 
@@ -35,7 +35,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
         #endregion
 
         #region Overrides
-        public void Enqueue(T? newData)
+        public override void Enqueue(T? newData)
         {
             if (!IsFull())
             {
@@ -55,7 +55,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
             }
         }
 
-        public CustomLinkedListNode<T>? Dequeue()
+        public override CustomLinkedListNode<T>? Dequeue()
         {
             int position = front;
 
@@ -71,7 +71,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
             return array[position];
         }
 
-        public bool IsEmpty()
+        public override bool IsEmpty()
         {
             return front == rear;
         }

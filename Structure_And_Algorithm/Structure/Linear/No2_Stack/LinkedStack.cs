@@ -12,27 +12,35 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
     /// 링크드 리스트 기반 스택
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class LinkedStack<T> : DoublyLinkedList<T>, AbstractStack<T>
+    public class LinkedStack<T> : AbstractStack<T>
     {
+        #region Member Fields
+        private DoublyLinkedList<T> linkedList;
+        #endregion
+
         #region Constructors
-        public LinkedStack() { }
+        public LinkedStack()
+        {
+            linkedList = new();
+        }
         public LinkedStack(T? data)
         {
+            linkedList = new();
             Push(data);
         }
         #endregion
 
         #region Overrides
-        public void Push(T? newData)
+        public override void Push(T? newData)
         {
-            Append(newData);
+            linkedList.Append(newData);
         }
 
-        public CustomLinkedListNode<T>? Peek()
+        public override CustomLinkedListNode<T>? Peek()
         {
             if (!IsEmpty())
             {
-                return Search(Length - 1);
+                return linkedList.Search(linkedList.Length - 1);
             }
             else
             {
@@ -40,11 +48,11 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
             }
         }
 
-        public CustomLinkedListNode<T>? Pop()
+        public override CustomLinkedListNode<T>? Pop()
         {
             if (!IsEmpty())
             {
-                return Delete(Length - 1);
+                return linkedList.Delete(linkedList.Length - 1);
             }
             else
             {
@@ -52,7 +60,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
             }
         }
 
-        public bool IsEmpty() { return Length == 0; }
+        public override bool IsEmpty() { return linkedList.Length == 0; }
         #endregion
     }
 }

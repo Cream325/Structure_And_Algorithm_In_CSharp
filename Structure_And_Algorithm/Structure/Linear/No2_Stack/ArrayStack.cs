@@ -14,13 +14,11 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
     public class ArrayStack<T> : AbstractStack<T>
     {
         #region Member Fields
-        private int top = -1;
         private int capacity = 0;
         private CustomLinkedListNode<T>[] array;
         #endregion
 
         #region Properties
-        public int Top { get => top; }
         public int Capacity { get => capacity; }
         #endregion
 
@@ -33,7 +31,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
         #endregion
 
         #region Overrides
-        public void Push(T? newData)
+        public override void Push(T? newData)
         {
             if (!IsFull())
             {
@@ -45,7 +43,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
             }
         }
 
-        public CustomLinkedListNode<T>? Peek()
+        public override CustomLinkedListNode<T>? Peek()
         {
             if (!IsEmpty())
             {
@@ -57,7 +55,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
             }
         }
 
-        public CustomLinkedListNode<T>? Pop()
+        public override CustomLinkedListNode<T>? Pop()
         {
             if (!IsEmpty())
             {
@@ -69,11 +67,13 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
             }
         }
 
-        public bool IsEmpty()
+        public override bool IsEmpty()
         {
             return top == -1;
         }
+        #endregion
 
+        #region Public Functions
         public bool IsFull()
         {
             return top > Capacity;

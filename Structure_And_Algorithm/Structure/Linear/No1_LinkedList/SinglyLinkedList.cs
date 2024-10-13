@@ -42,21 +42,8 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         {
             for (int i = 0; i < newDatas.Length; i++)
             {
-                CustomLinkedListNode<T> newNode = new(newDatas[i]);
-
-                if (HeadNode == null && TailNode == null)
-                {
-                    HeadNode = newNode;
-                    TailNode = HeadNode;
-                }
-                else
-                {
-                    TailNode.NextNode = newNode;
-                    TailNode = TailNode.NextNode;
-                }
+                Append(newDatas[i]);
             }
-
-            Length += newDatas.Length;
         }
         #endregion
 

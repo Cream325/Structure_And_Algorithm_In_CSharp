@@ -9,7 +9,13 @@ namespace Structure_And_Algorithm.Structure.Nodes
     public class CustomLinkedListNode<T> : CustomNode<T>
     {
         #region Properties
+        /// <summary>
+        /// 이전 노드
+        /// </summary>
         public CustomLinkedListNode<T>? PreviousNode { get => (CustomLinkedListNode<T>?)nodeList[0]; set => nodeList[0] = value; }
+        /// <summary>
+        /// 다음 노드
+        /// </summary>
         public CustomLinkedListNode<T>? NextNode { get => (CustomLinkedListNode<T>?)nodeList[1]; set => nodeList[1] = value; }
         #endregion
 

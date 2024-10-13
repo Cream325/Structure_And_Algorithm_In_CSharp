@@ -8,10 +8,10 @@ using Structure_And_Algorithm.Structure.Nodes;
 namespace Structure_And_Algorithm.Structure.Linear.Queue
 {
     /// <summary>
-    /// 큐 인터페이스
+    /// 큐 추상 클래스
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface AbstractQueue<T>
+    public abstract class AbstractQueue<T>
     {
         #region Abstract Functions
         /// <summary>
