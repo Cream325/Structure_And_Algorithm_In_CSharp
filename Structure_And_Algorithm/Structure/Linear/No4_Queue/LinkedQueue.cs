@@ -19,12 +19,12 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
         #endregion
 
         #region Constructors
-        public LinkedQueue()
+        public LinkedQueue() : base()
         {
             linkedList = new();
         }
 
-        public LinkedQueue(T? data)
+        public LinkedQueue(T? data) : base()
         {
             linkedList = new();
             Enqueue(data);
@@ -35,23 +35,19 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
         public override void Enqueue(T? newData)
         {
             linkedList.Append(newData);
+            rear++;
         }
 
         public override CustomLinkedListNode<T>? Dequeue()
         {
-            if (!IsEmpty())
+            CustomLinkedListNode<T>? dequeuedNode = linkedList.Delete(0);
+            if(dequeuedNode != null)
             {
-                return linkedList.Delete(0);
+                front++;
+                return dequeuedNode;
             }
-            else
-            {
-                return null;
-            }
-        }
-
-        public override bool IsEmpty()
-        {
-            return linkedList.Length == 0;
+            
+            return null;
         }
         #endregion
     }

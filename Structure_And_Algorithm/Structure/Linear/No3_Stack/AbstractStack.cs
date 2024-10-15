@@ -14,7 +14,18 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
     public abstract class AbstractStack<T>
     {
         #region Member Fields
-        protected int top = -1;
+        protected int top;
+        #endregion
+
+        #region Properties
+        public int Top { get => top; }
+        #endregion
+
+        #region Constructors
+        public AbstractStack()
+        {
+            top = 0;
+        }
         #endregion
 
         #region Abstract Functions
@@ -22,7 +33,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
         /// 스택 - 단일 추가
         /// </summary>
         /// <param name="newData"></param>
-        public abstract void Push(T? newData);
+        public abstract void Push(T newData);
 
         /// <summary>
         /// 스택 - 단일 검색
@@ -35,12 +46,6 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
         /// </summary>
         /// <returns></returns>
         public abstract CustomLinkedListNode<T>? Pop();
-
-        /// <summary>
-        /// 스택 - 빈 공간 여부 확인
-        /// </summary>
-        /// <returns></returns>
-        public abstract bool IsEmpty();
         #endregion
     }
 }

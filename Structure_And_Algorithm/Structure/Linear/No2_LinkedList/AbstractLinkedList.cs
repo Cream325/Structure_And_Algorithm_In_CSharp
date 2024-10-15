@@ -10,21 +10,35 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
     public abstract class AbstractLinkedList<T>
     {
         #region Member Fields
-        private CustomLinkedListNode<T>? headNode = null;
-        private CustomLinkedListNode<T>? tailNode = null;
-        private int length = 0;
+        protected CustomLinkedListNode<T>? headNode;
+        protected CustomLinkedListNode<T>? tailNode;
+        protected int length;
         #endregion
 
         #region Properties
-        public CustomLinkedListNode<T>? HeadNode { get => headNode; set => headNode = value; }
-        public CustomLinkedListNode<T>? TailNode { get => tailNode; set => tailNode = value; }
-        public int Length { get => length; set => length = value; }
+        /// <summary>
+        /// 헤드 노드
+        /// </summary>
+        public CustomLinkedListNode<T>? HeadNode { get => headNode; }
+        /// <summary>
+        /// 테일 노드
+        /// </summary>
+        public CustomLinkedListNode<T>? TailNode { get => tailNode; }
+        /// <summary>
+        /// 링크드 리스트 길이
+        /// </summary>
+        public int Length { get => length; }
         #endregion
 
         #region Constructors
-        public AbstractLinkedList() { }
+        public AbstractLinkedList()
+        {
+            headNode = null;
+            tailNode = null;
+            length = 0;
+        }
 
-        public AbstractLinkedList(T? data)
+        public AbstractLinkedList(T? data) : this()
         {
             Append(data);
         }

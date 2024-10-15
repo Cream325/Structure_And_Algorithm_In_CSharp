@@ -1,4 +1,4 @@
-﻿using Structure_And_Algorithm.Structure.Nodes;
+﻿using Structure_And_Algorithm.Structure.CustomNodes.TreeNodes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -19,48 +19,40 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
         #endregion
 
         #region Constructors
-        public LinkedStack()
+        public LinkedStack() : base()
         {
             linkedList = new();
         }
-        public LinkedStack(T? data)
+        public LinkedStack(T data) : base()
         {
-            linkedList = new();
-            Push(data);
+            linkedList = new(data);
         }
         #endregion
 
         #region Overrides
-        public override void Push(T? newData)
+        public override void Push(T newData)
         {
             linkedList.Append(newData);
+            top++;
         }
 
         public override CustomLinkedListNode<T>? Peek()
         {
-            if (!IsEmpty())
-            {
-                return linkedList.Search(linkedList.Length - 1);
-            }
-            else
-            {
-                return null;
-            }
+            CustomLinkedListNode<T>? peekedNode = linkedList.Search(linkedList.Length - 1);
+            return peekedNode != null ? peekedNode : null;
         }
 
         public override CustomLinkedListNode<T>? Pop()
         {
-            if (!IsEmpty())
+            CustomLinkedListNode<T>? poppedNode = linkedList.Delete(linkedList.Length - 1);
+            if (poppedNode != null)
             {
-                return linkedList.Delete(linkedList.Length - 1);
+                top--;
+                return poppedNode;
             }
-            else
-            {
-                return null;
-            }
-        }
 
-        public override bool IsEmpty() { return linkedList.Length == 0; }
+            return null;
+        }
         #endregion
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Structure_And_Algorithm.Structure.Nodes
+namespace Structure_And_Algorithm.Structure.CustomNodes.TreeNodes
 {
     public class CustomTreeNode<T> : CustomNode<T>
     {
