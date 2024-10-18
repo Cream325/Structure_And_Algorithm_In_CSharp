@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Structure_And_Algorithm.Structure.Nodes
 {
-    public class CustomLinkedListNode<T> : CustomNode<T>
+    public class CustomLinkedListNode<T> : AbstractNode<T>
     {
         #region Properties
         /// <summary>

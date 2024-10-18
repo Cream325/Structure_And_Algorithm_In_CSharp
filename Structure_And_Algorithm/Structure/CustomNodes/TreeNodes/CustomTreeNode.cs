@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Structure_And_Algorithm.Structure.CustomNodes.TreeNodes
 {
-    public class CustomTreeNode<T> : CustomNode<T>
+    public class CustomTreeNode<T> : AbstractNode<T>
     {
         #region Properties
         /// <summary>

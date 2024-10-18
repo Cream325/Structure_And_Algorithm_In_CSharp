@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Structure_And_Algorithm.Structure.Nodes
 {
-    public class CustomNode<T>
+    public abstract class AbstractNode<T>
     {
         #region Member Fields
         private T? data;
         /// <summary>
         /// 노드들을 담아둔 리스트
         /// </summary>
-        protected List<CustomNode<T>?> nodeList;
+        protected List<AbstractNode<T>?> nodeList;
         #endregion
 
         #region Properties
@@ -24,7 +24,7 @@ namespace Structure_And_Algorithm.Structure.Nodes
         #endregion
 
         #region Constructors
-        public CustomNode(T? data)
+        public AbstractNode(T? data)
         {
             this.data = data;
             nodeList = new();
