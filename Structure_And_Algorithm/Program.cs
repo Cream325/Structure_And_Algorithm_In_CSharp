@@ -8,10 +8,14 @@ namespace Structure_And_Algorithm
     {
         public static void Main(string[] args)
         {
-            /*
-            LinkedListTestBuilder<int?>.CreateTest(LinkedListType.SinglyLinkedList)
-                                       .AddAppendTest(0)
-                                       .AddAppendTest(new int?[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 })
+            LinkedListExample();
+        }
+
+        private static void LinkedListExample()
+        {
+            LinkedListTestBuilder<int?>.CreateTest(LinkedListType.SinglyLinkedList, 0)
+                                       .AddAppendTest(1)
+                                       .AddAppendTest(new int?[] { 2, 3, 4, 5, 6, 7, 8, 9 })
 
                                        .AddInsertTest(10, 5)
                                        .AddInsertTest(20, 0)
@@ -25,19 +29,14 @@ namespace Structure_And_Algorithm
                                        .AddSearchTest(-6)
                                        .AddSearchTest(27)
 
+                                       .AddDeleteTest(3)
                                        .AddDeleteTest(0)
+                                       .AddDeleteTest(12)
+                                       .AddDeleteTest(-17)
+                                       .AddDeleteTest(34)
 
                                        .AddPrintTest()
                                        .Test();
-            */
-
-            DynamicArray<int> array = new(10);
-            array.Append(0);
-            array.AppendAll(new int[] { 1, 2, 3, 4, 5, 6, 8, 9 });
-            array.Insert(7, 7);
-            Console.WriteLine($"Searching: {array.Search(9)}");
-            array.Delete(0);
-            array.Traversal();
         }
     }
 }

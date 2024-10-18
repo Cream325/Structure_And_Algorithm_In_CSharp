@@ -93,9 +93,9 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
         #region Function 1. 단일 추가
         public void AppendTest(T newData)
         {
-            list.Append(newData);
-
             Console.WriteLine("-> Function 1. 단일 추가");
+
+            list.Append(newData);
             Console.WriteLine($"추가된 값: {newData}");
         }
         #endregion
@@ -103,10 +103,10 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
         #region Function 2-1. 전체 추가(배열)
         public void AppendTest(T[] newArrayData)
         {
-            list.AppendAll(newArrayData);
-
             Console.WriteLine("-> Function 2-1. 전체 추가(배열)");
-            Console.Write($"추가된 값: [");
+
+            list.AppendAll(newArrayData);
+            Console.Write($"추가된 값: [ ");
             foreach (T newData in newArrayData)
                 Console.Write($"{newData} ");
 
@@ -118,8 +118,6 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
 
         public void InsertTest(T newData, int index)
         {
-            list.Insert(newData, index);
-
             #region 동작 테스트
             if (index >= 0 && index <= list.Length-1)
             {
@@ -163,14 +161,13 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
 
             #endregion
 
+            list.Insert(newData, index);
             Console.WriteLine($"인덱스: {index}");
             Console.WriteLine($"삽입된 값: {newData}");
         }
 
         public void SearchTest(int index)
         {
-            CustomLinkedListNode<T>? searchedNode = list.Search(index);
-
             #region 동작 테스트
             if (index >= 0 && index <= list.Length-1)
             {
@@ -214,14 +211,13 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
 
             #endregion
 
+            CustomLinkedListNode<T>? searchedNode = list.Search(index);
             Console.Write($"검색된 노드 값: {(searchedNode != null ? searchedNode.Data : null)}");
             Console.WriteLine();
         }
 
         public void DeleteTest(int index)
         {
-            CustomLinkedListNode<T>? deletedNode = list.Delete(index);
-
             #region 동작 테스트
             if (index >= 0 && index <= list.Length - 1)
             {
@@ -238,7 +234,7 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
                 #endregion
 
                 #region Function 1-3. 인덱스가 Length-1일 때
-                if (index == list.Length - 1)
+                if (index == list.Length-1)
                     Console.WriteLine("-> Function 1-3. 인덱스가 Length-1일 때");
                 #endregion
 
@@ -265,6 +261,7 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
 
             #endregion
 
+            CustomLinkedListNode<T>? deletedNode = list.Delete(index);
             Console.WriteLine($"인덱스: {index}");
             Console.WriteLine($"삭제된 노드 값: {(deletedNode != null ? deletedNode.Data : null)}");
         }
