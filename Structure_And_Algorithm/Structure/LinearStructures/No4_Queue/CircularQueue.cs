@@ -40,6 +40,14 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
             }
         }
 
+        public override CustomLinkedListNode<T>? Peek()
+        {
+            if(!IsEmpty())
+                return array[front];
+
+            return null;
+        }
+
         public override CustomLinkedListNode<T>? Dequeue()
         {
             if(!IsEmpty())

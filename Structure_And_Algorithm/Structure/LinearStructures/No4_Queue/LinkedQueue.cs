@@ -1,10 +1,5 @@
 ﻿using Structure_And_Algorithm.Structure.Linear.LinkedList;
 using Structure_And_Algorithm.Structure.Nodes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Structure_And_Algorithm.Structure.Linear.Queue
 {
@@ -16,6 +11,10 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
     {
         #region Member Fields
         DoublyLinkedList<T> linkedList;
+        #endregion
+
+        #region Properties
+        public int Length { get => linkedList.Length; }
         #endregion
 
         #region Constructors
@@ -36,6 +35,12 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
         {
             linkedList.Append(newData);
             rear++;
+        }
+
+        public override CustomLinkedListNode<T>? Peek()
+        {
+            CustomLinkedListNode<T>? dequeuedNode = linkedList.Search(0);
+            return dequeuedNode != null ?dequeuedNode : null;
         }
 
         public override CustomLinkedListNode<T>? Dequeue()

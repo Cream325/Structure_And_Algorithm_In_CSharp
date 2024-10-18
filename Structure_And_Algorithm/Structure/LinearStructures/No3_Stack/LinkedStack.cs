@@ -18,6 +18,10 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
         private DoublyLinkedList<T> linkedList;
         #endregion
 
+        #region Properties
+        public int Length { get => linkedList.Length; }
+        #endregion
+
         #region Constructors
         public LinkedStack() : base()
         {
