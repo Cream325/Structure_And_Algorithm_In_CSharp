@@ -1,4 +1,6 @@
-﻿using Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList;
+﻿using Structure_And_Algorithm.Structure.LinearStructures.No1_Array;
+using Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList;
+using System;
 
 namespace Structure_And_Algorithm
 {
@@ -6,6 +8,7 @@ namespace Structure_And_Algorithm
     {
         public static void Main(string[] args)
         {
+            /*
             LinkedListTestBuilder<int?>.CreateTest(LinkedListType.SinglyLinkedList)
                                        .AddAppendTest(0)
                                        .AddAppendTest(new int?[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 })
@@ -26,6 +29,15 @@ namespace Structure_And_Algorithm
 
                                        .AddPrintTest()
                                        .Test();
+            */
+
+            DynamicArray<int> array = new(10);
+            array.Append(0);
+            array.AppendAll(new int[] { 1, 2, 3, 4, 5, 6, 8, 9 });
+            array.Insert(7, 7);
+            Console.WriteLine($"Searching: {array.Search(9)}");
+            array.Delete(0);
+            array.Traversal();
         }
     }
 }
