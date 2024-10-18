@@ -1,4 +1,6 @@
-﻿namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
+﻿using Structure_And_Algorithm.Structure.Utils;
+
+namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
 {
     /// <summary>
     /// 동적 배열
