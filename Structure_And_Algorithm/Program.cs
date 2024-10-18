@@ -1,10 +1,4 @@
-﻿using Structure_And_Algorithm.Structure.Linear.LinkedList;
-using Structure_And_Algorithm.Structure.Nodes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList;
 
 namespace Structure_And_Algorithm
 {
@@ -12,28 +6,26 @@ namespace Structure_And_Algorithm
     {
         public static void Main(string[] args)
         {
-            SinglyLinkedList<object> list = new();
-            //Console.WriteLine("Hello World!");
+            LinkedListTestBuilder<int?>.CreateTest(LinkedListType.SinglyLinkedList)
+                                       .AddAppendTest(0)
+                                       .AddAppendTest(new int?[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 })
 
-            object[] objects = new object[5] { 1, 2, 3, 4, 5 };
+                                       .AddInsertTest(10, 5)
+                                       .AddInsertTest(20, 0)
+                                       .AddInsertTest(30, 11)
+                                       .AddInsertTest(40, -10)
+                                       .AddInsertTest(50, 42)
 
-            // 특정 값 삽입
-            list.AppendAll(objects);
+                                       .AddSearchTest(7)
+                                       .AddSearchTest(0)
+                                       .AddSearchTest(14)
+                                       .AddSearchTest(-6)
+                                       .AddSearchTest(27)
 
-            // 특정 값 삽입
-            //list.Insert(10, 0);
-            //list.Insert(100, 3);
-            list.Insert(10, 5);
+                                       .AddDeleteTest(0)
 
-            // 특정 값 검색
-            CustomLinkedListNode<object>? searchedNode = list.Search(0);
-            Console.WriteLine($"{searchedNode.Data}");
-
-            // 특정 값 삭제
-            list.Delete(0);
-
-            // 리스트 출력
-            list.Traversal();
+                                       .AddPrintTest()
+                                       .Test();
         }
     }
 }
