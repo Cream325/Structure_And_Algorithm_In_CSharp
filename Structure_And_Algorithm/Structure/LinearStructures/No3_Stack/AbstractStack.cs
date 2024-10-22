@@ -46,6 +46,10 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
         /// </summary>
         /// <returns></returns>
         public abstract CustomLinkedListNode<T>? Pop();
+
+        public abstract bool IsEmpty();
+
+        public abstract bool IsFull();
         #endregion
     }
 }

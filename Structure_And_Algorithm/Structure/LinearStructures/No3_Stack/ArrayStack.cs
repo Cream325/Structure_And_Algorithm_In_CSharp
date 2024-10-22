@@ -51,15 +51,13 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
         {
             return !IsEmpty() ? array[--top] : default;
         }
-        #endregion
 
-        #region Private Functions
-        private bool IsEmpty()
+        public override bool IsEmpty()
         {
             return top <= 0;
         }
 
-        private bool IsFull()
+        public override bool IsFull()
         {
             return top >= Capacity;
         }

@@ -1,11 +1,4 @@
-﻿using Structure_And_Algorithm.Structure.Linear.LinkedList;
-using Structure_And_Algorithm.Structure.Linear.Stack;
-using Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Structure_And_Algorithm.Structure.Linear.Stack;
 
 namespace Structure_And_Algorithm.Structure.TestCodes.No3_Stack
 {

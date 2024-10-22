@@ -42,20 +42,36 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
 
         public override CustomLinkedListNode<T>? Peek()
         {
-            CustomLinkedListNode<T>? peekedNode = linkedList.Search(linkedList.Length - 1);
-            return peekedNode != null ? peekedNode : null;
+            if(!IsEmpty())
+            {
+                CustomLinkedListNode<T>? peekedNode = linkedList.Search(linkedList.Length - 1);
+                if(peekedNode != null)
+                    return peekedNode;
+            }
+
+            return null;
         }
 
         public override CustomLinkedListNode<T>? Pop()
         {
-            CustomLinkedListNode<T>? poppedNode = linkedList.Delete(linkedList.Length - 1);
-            if (poppedNode != null)
+            if (!IsEmpty())
             {
-                top--;
-                return poppedNode;
+                CustomLinkedListNode<T>? poppedNode = linkedList.Delete(linkedList.Length - 1);
+                if (poppedNode != null)
+                    return poppedNode;
             }
 
             return null;
+        }
+
+        public override bool IsEmpty()
+        {
+            return top <= 0;
+        }
+
+        public override bool IsFull()
+        {
+            return false;
         }
         #endregion
     }

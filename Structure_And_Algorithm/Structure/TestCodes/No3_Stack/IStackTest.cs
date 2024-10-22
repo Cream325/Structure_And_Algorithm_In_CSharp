@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Structure_And_Algorithm.Structure.TestCodes.No3_Stack
+﻿namespace Structure_And_Algorithm.Structure.TestCodes.No3_Stack
 {
     /// <summary>
     /// 스택 테스트코드 인터페이스
