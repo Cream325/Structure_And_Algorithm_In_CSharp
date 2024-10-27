@@ -61,25 +61,22 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         {
             CustomLinkedListNode<T> newNode = new(newData);
 
-            // 헤드가 null인 경우, 인덱스가 0 이하인 경우
-            if(headNode == null || index <= 0)
+            // 헤드가 null인 경우, 인덱스가 리스트 최대 인덱스 이상인 경우 (Append와 연산이 같음)
+            if(headNode == null || index >= length-1)
+            {
+                Append(newData);
+                return;
+            }
+
+            // 인덱스가 0 이하인 경우
+            if (index <= 0)
             {
                 newNode.NextNode = headNode;
                 headNode.PreviousNode = newNode;
                 headNode = newNode;
-                length++;
-                return;
-            }
 
-            // 인덱스가 리스트 최대 인덱스 이상인 경우 (Append와 연산이 같음)
-            if(index >= length-1)
-            {
-                tailNode.NextNode = newNode;
-                newNode.PreviousNode = tailNode;
-                tailNode = newNode;
-
-                tailNode.NextNode = headNode;
                 headNode.PreviousNode = tailNode;
+                tailNode.NextNode = headNode;
                 length++;
                 return;
             }
@@ -100,17 +97,19 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
 
             if(index <= length/2)
             {
+                // 헤드에서 검색
                 currentNode = headNode;
-                while(currentNode.NextNode != null && --index >= 0)
+                while(currentNode.NextNode != headNode && --index >= 0)
                 {
                     currentNode = currentNode.NextNode;
                 }
             }
             else
             {
+                // 테일에서 검색
                 int maxIndex = length - 1;
                 currentNode = tailNode;
-                while(currentNode.PreviousNode != null && --maxIndex >= index)
+                while(currentNode.PreviousNode != tailNode && --maxIndex >= index)
                 {
                     currentNode = currentNode.PreviousNode;
                 }
@@ -119,7 +118,8 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
             return currentNode;
         }
         #endregion
-
+        
+        // 수정필요
         #region Delete
         public override CustomLinkedListNode<T>? Delete(int index)
         {
@@ -146,16 +146,15 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
                         currentNode.NextNode.PreviousNode = currentNode.PreviousNode;
                     }
                     else
-                    {
                         // 테일을 삭제할 경우
                         currentNode.PreviousNode.NextNode = headNode;
-                    }
 
                     deletedNode = currentNode;
                 }
+
+                length--;
             }
 
-            length--;
             return deletedNode;
         }
         #endregion
@@ -165,10 +164,13 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         {
             CustomLinkedListNode<T>? currentNode = headNode;
 
-            while(currentNode != tailNode.NextNode)
+            if (currentNode != null)
             {
-                Console.Write(currentNode.Data + " ");
-                currentNode = currentNode.NextNode;
+                do
+                {
+                    Console.Write(currentNode.Data + " ");
+                    currentNode = currentNode.NextNode;
+                } while(currentNode != headNode);
             }
         }
         #endregion

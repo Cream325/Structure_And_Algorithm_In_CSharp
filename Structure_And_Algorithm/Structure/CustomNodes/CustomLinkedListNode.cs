@@ -13,6 +13,7 @@ namespace Structure_And_Algorithm.Structure.Nodes
         /// 이전 노드
         /// </summary>
         public CustomLinkedListNode<T>? PreviousNode { get => (CustomLinkedListNode<T>?)nodeList[0]; set => nodeList[0] = value; }
+
         /// <summary>
         /// 다음 노드
         /// </summary>

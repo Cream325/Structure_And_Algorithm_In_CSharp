@@ -64,22 +64,19 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         {
             CustomLinkedListNode<T> newNode = new(newData);
 
-            // 헤드가 null인 경우, 인덱스가 0 이하인 경우
-            if (headNode == null || index <= 0)
+            // 헤드가 null인 경우, 인덱스가 리스트 최대 인덱스 이상인 경우 (Append와 연산이 같음)
+            if (headNode == null || index >= length-1)
+            {
+                Append(newData);
+                return;
+            }
+
+            // 인덱스가 0 이하인 경우
+            if (index <= 0)
             {
                 newNode.NextNode = headNode;
                 headNode.PreviousNode = newNode;
                 headNode = newNode;
-                length++;
-                return;
-            }
-
-            // 인덱스가 리스트 최대 인덱스 이상인 경우 (Append와 연산이 같음)
-            if(index >= length-1)
-            {
-                tailNode.NextNode = newNode;
-                newNode.PreviousNode = tailNode;
-                tailNode = tailNode.NextNode;
                 length++;
                 return;
             }
@@ -100,6 +97,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
 
             if(index <= length/2)
             {
+                // 헤드에서 검색
                 currentNode = headNode;
                 while(currentNode.NextNode != null && --index >= 0)
                 {
@@ -108,6 +106,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
             }
             else
             {
+                // 테일에서 검색
                 int maxIndex = length - 1;
                 currentNode = tailNode;
                 while(currentNode.PreviousNode != null && --maxIndex >= index)
@@ -145,16 +144,15 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
                         currentNode.NextNode.PreviousNode = currentNode.PreviousNode;
                     }
                     else
-                    {
                         // 테일을 삭제할 경우
                         currentNode.PreviousNode.NextNode = null;
-                    }
 
                     deletedNode = currentNode;
                 }
+
+                length--;
             }
 
-            length--;
             return deletedNode;
         }
         #endregion

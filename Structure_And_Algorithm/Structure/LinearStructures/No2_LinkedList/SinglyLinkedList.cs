@@ -58,20 +58,18 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         {
             CustomLinkedListNode<T> newNode = new(newData);
 
-            // 헤드가 null인 경우, 인덱스가 0 이하인 경우
-            if(headNode == null || index <= 0)
+            // 헤드가 null인 경우, 인덱스가 리스트 최대 인덱스 이상인 경우 (Append와 연산이 같음)
+            if(headNode == null || index >= length-1)
             {
-                newNode.NextNode = headNode;
-                headNode = newNode;
-                length++;
+                Append(newData);
                 return;
             }
 
-            // 인덱스가 리스트 최대 인덱스 이상인 경우 (Append와 연산이 같음)
-            if(index >= length-1)
+            // 헤드가 null인 경우, 인덱스가 0 이하인 경우
+            if (index <= 0)
             {
-                tailNode.NextNode = newNode;
-                tailNode = tailNode.NextNode;
+                newNode.NextNode = headNode;
+                headNode = newNode;
                 length++;
                 return;
             }
@@ -108,10 +106,13 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
 
             if (headNode != null)
             {
+                CustomLinkedListNode<T>? tempNode;
+
                 // 헤드를 삭제할 경우
                 if(headNode.NextNode == null || index <= 0)
                 {
-                    deletedNode = headNode;
+                    tempNode = headNode;
+                    deletedNode = tempNode;
                     headNode = headNode.NextNode;
                 }
                 else
@@ -119,11 +120,12 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
                     // 중간노드, 테일을 삭제할 경우
                     index = index >= length ? length-1 : index;
                     CustomLinkedListNode<T>? currentNode = Search(index - 1);
-                    CustomLinkedListNode<T>? tempNode = currentNode.NextNode;
+                    tempNode = currentNode.NextNode;
                     deletedNode = tempNode;
                     currentNode.NextNode = tempNode.NextNode;
                 }
 
+                tempNode.NextNode = null;
                 length--;
             }
 
