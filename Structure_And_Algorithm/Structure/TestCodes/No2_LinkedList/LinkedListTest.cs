@@ -1,5 +1,6 @@
 ﻿using Structure_And_Algorithm.Structure.Linear.LinkedList;
 using Structure_And_Algorithm.Structure.Linear.Queue;
+using Structure_And_Algorithm.Structure.LinearStructures.No1_Array;
 using Structure_And_Algorithm.Structure.Nodes;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
     public class LinkedListTest<T> : ILinkedListTest<T>
     {
         #region Member Fields
-        private AbstractLinkedList<T> list;
+        private AbstractLinkedList<T, CustomLinkedListNode<T>> list;
         private LinkedListType linkedListType;
         #endregion
 
@@ -211,8 +212,8 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
 
             #endregion
 
-            CustomLinkedListNode<T>? searchedNode = list.Search(index);
-            Console.WriteLine($"검색된 노드 값: {(searchedNode != null ? searchedNode.Data : null)}");
+            T? searchedNode = list.Search(index);
+            Console.WriteLine($"검색된 노드 값: {(searchedNode != null ? searchedNode : null)}");
         }
 
         public void DeleteTest(int index)
@@ -260,9 +261,9 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
 
             #endregion
 
-            CustomLinkedListNode<T>? deletedNode = list.Delete(index);
+            T? deletedNode = list.Delete(index);
             Console.WriteLine($"인덱스: {index}");
-            Console.WriteLine($"삭제된 노드 값: {(deletedNode != null ? deletedNode.Data : null)}");
+            Console.WriteLine($"삭제된 노드 값: {(deletedNode != null ? deletedNode : null)}");
         }
 
         public void PrintTest()
@@ -277,7 +278,8 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
             #endregion
 
             Console.Write("현재 리스트: ");
-            list.Traversal();
+            
+            ((AbstractArray<T>)list).Traversal();
             Console.WriteLine();
         }
 
@@ -425,7 +427,7 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
 
                 for(int i = 0; i < length; i++)
                 {
-                    Action item = actions.Dequeue().Data;
+                    Action item = actions.Dequeue();
 
                     if (!string.Equals(item?.Method.Name, lastAction?.Method.Name))
                     {

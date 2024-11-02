@@ -10,7 +10,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
     /// 이중 링크드 리스트
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class DoublyLinkedList<T> : AbstractLinkedList<T>
+    public class DoublyLinkedList<T> : AbstractLinkedList<T, CustomLinkedListNode<T>>
     {
         #region Constructors
         public DoublyLinkedList() : base() { }
@@ -49,24 +49,16 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
             tailNode = tailNode.NextNode;
             length++;
         }
-
-        public override void AppendAll(T[] newDatas)
-        {
-            for (int i = 0; i < newDatas.Length; i++)
-            {
-                Append(newDatas[i]);
-            }
-        }
         #endregion
 
         #region Insert
-        public override void Insert(T newData, int index)
+        public override bool Insert(T newData, int index)
         {
             // Head가 null인 경우, 인덱스가 length-1이상인 경우
             if (headNode == null || index >= length - 1)
             {
                 Append(newData);
-                return;
+                return false;
             }
 
             CustomLinkedListNode<T> newNode = new(newData);
@@ -81,7 +73,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
             else
             {
                 // 일반적인 경우
-                CustomLinkedListNode<T>? currentNode = Search(index);
+                CustomLinkedListNode<T>? currentNode = _Search(index);
                 currentNode.PreviousNode.NextNode = newNode;
                 newNode.PreviousNode = currentNode.PreviousNode;
                 newNode.NextNode = currentNode;
@@ -89,11 +81,13 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
             }
 
             length++;
+
+            return false;
         }
         #endregion
 
         #region Search
-        public override CustomLinkedListNode<T>? Search(int index)
+        private CustomLinkedListNode<T>? _Search(int index)
         {
             CustomLinkedListNode<T>? currentNode = headNode;
 
@@ -119,10 +113,21 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
 
             return currentNode;
         }
+
+        public override T? Search(int index)
+        {
+            var _ = _Search(index);
+            return _ == null ? default : _.Data;
+        }
         #endregion
 
         #region Delete
-        public override CustomLinkedListNode<T>? Delete(int index)
+        public override T? Delete(int index)
+        {
+            var _ = _Delete(index);
+            return _ == null ? default : _.Data;
+        }
+        private CustomLinkedListNode<T>? _Delete(int index)
         {
             // Head가 null인 경우
             if (headNode == null)
@@ -149,7 +154,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
                 }
                 else
                 {
-                    CustomLinkedListNode<T> currentNode = Search(index);
+                    CustomLinkedListNode<T> currentNode = _Search(index);
                     tempNode = currentNode;
                     currentNode.PreviousNode.NextNode = currentNode.NextNode;
 
@@ -166,19 +171,6 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
             length--;
 
             return deletedNode;
-        }
-        #endregion
-
-        #region Print
-        public override void Traversal()
-        {
-            CustomLinkedListNode<T>? currentNode = headNode;
-
-            while (currentNode != null)
-            {
-                Console.Write(currentNode.Data + " ");
-                currentNode = currentNode.NextNode;
-            }
         }
         #endregion
 

@@ -37,22 +37,22 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
             rear++;
         }
 
-        public override CustomLinkedListNode<T>? Peek()
+        public override T? Peek()
         {
-            CustomLinkedListNode<T>? dequeuedNode = linkedList.Search(0);
-            return dequeuedNode != null ?dequeuedNode : null;
+            T? dequeuedNode = linkedList.Search(0);
+            return dequeuedNode != null ?dequeuedNode : default;
         }
 
-        public override CustomLinkedListNode<T>? Dequeue()
+        public override T? Dequeue()
         {
-            CustomLinkedListNode<T>? dequeuedNode = linkedList.Delete(0);
+            T? dequeuedNode = linkedList.Delete(0);
             if(dequeuedNode != null)
             {
                 front++;
                 return dequeuedNode;
             }
             
-            return null;
+            return default;
         }
         #endregion
     }

@@ -20,7 +20,7 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No3_Stack
     public class StackTest<T> : IStackTest<T>
     {
         #region Member Fields
-        private AbstractStack<T> stack;
+        private IStack<T> stack;
         private StackType stackType;
         #endregion
 
@@ -47,7 +47,7 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No3_Stack
                         stack = new ArrayStack<T>(capacity);
                         break;
                     case StackType.LinkedStack:
-                        stack = new LinkedStack<T>();
+                        stack = new DoublyLinkedStack<T>();
                         break;
                 }
             }
@@ -60,10 +60,12 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No3_Stack
                 switch (stackType)
                 {
                     case StackType.ArrayStack:
-                        stack = new ArrayStack<T>(capacity, initialData);
+                        stack = new ArrayStack<T>(capacity);
+                        stack.Push(initialData);
                         break;
                     case StackType.LinkedStack:
-                        stack = new LinkedStack<T>(initialData);
+                        stack = new DoublyLinkedStack<T>();
+                        stack.Push(initialData);
                         break;
                 }
             }
@@ -119,8 +121,8 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No3_Stack
 
             #endregion
 
-            CustomLinkedListNode<T>? searchedNode = stack.Peek();
-            Console.WriteLine($"검색된 노드 값: {(searchedNode != null ? searchedNode.Data : null)}");
+            T? searchedNode = stack.Peek();
+            Console.WriteLine($"검색된 노드 값: {(searchedNode != null ? searchedNode : null)}");
         }
 
         public void PopTest()
@@ -142,8 +144,8 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No3_Stack
 
             #endregion
 
-            CustomLinkedListNode<T>? deletedNode = stack.Pop();
-            Console.WriteLine($"삭제된 노드 값: {(deletedNode != null ? deletedNode.Data : null)}");
+            T? deletedNode = stack.Pop();
+            Console.WriteLine($"삭제된 노드 값: {(deletedNode != null ? deletedNode : null)}");
         }
         #endregion
     }
@@ -247,7 +249,7 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No3_Stack
 
                 for(int i = 0; i < length; i++)
                 {
-                    Action item = actions.Dequeue().Data;
+                    Action item = actions.Dequeue();
 
                     if(!string.Equals(item?.Method.Name, lastAction?.Method.Name))
                     {

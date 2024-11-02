@@ -26,6 +26,8 @@ namespace Structure_And_Algorithm.Structure.Nodes
             nodeList.Add(null);
             nodeList.Add(null);
         }
+
+        public CustomLinkedListNode() : base(default) {}
         #endregion
     }
 }

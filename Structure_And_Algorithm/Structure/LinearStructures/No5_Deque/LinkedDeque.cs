@@ -59,7 +59,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
         #endregion
 
         #region Pop
-        public override CustomLinkedListNode<T>? Pop(IOType type)
+        public override T? Pop(IOType type)
         {
             if (type == IOType.Front)
             {
@@ -71,7 +71,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
             }
         }
 
-        private CustomLinkedListNode<T>? PopFront()
+        private T? PopFront()
         {
             if (!IsEmpty())
             {
@@ -79,11 +79,11 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
             }
             else
             {
-                return null;
+                return default;
             }
         }
 
-        private CustomLinkedListNode<T>? PopBack()
+        private T? PopBack()
         {
             if (!IsEmpty())
             {
@@ -91,12 +91,12 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
             }
             else
             {
-                return null;
+                return default;
             }
         }
         #endregion
 
-        public CustomLinkedListNode<T>? Front()
+        public T? Front()
         {
             if (!IsEmpty())
             {
@@ -104,11 +104,11 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
             }
             else
             {
-                return null;
+                return default;
             }
         }
 
-        public CustomLinkedListNode<T>? Back()
+        public T? Back()
         {
             if (!IsEmpty())
             {
@@ -116,7 +116,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
             }
             else
             {
-                return null;
+                return default;
             }
         }
 

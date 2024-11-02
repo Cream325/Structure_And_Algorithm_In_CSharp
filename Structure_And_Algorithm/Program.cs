@@ -9,8 +9,14 @@ namespace Structure_And_Algorithm
     {
         public static void Main(string[] args)
         {
-            //LinkedListExample();
-            StackExample();
+            var a = new DynamicArray<int, ArrayDynamic<int>>();
+            a.arr.ReSize(23);
+
+            a.Append(234);
+            Console.WriteLine(a.arr.Search(0));
+
+            LinkedListExample();
+            //StackExample();
         }
 
         private static void LinkedListExample()
@@ -61,5 +67,6 @@ namespace Structure_And_Algorithm
 
                                   .Test();
         }
+
     }
 }

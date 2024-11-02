@@ -47,13 +47,13 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
         /// 큐 - 단일 검색
         /// </summary>
         /// <returns></returns>
-        public abstract CustomLinkedListNode<T>? Peek();
+        public abstract T? Peek();
 
         /// <summary>
         /// 큐 - 단일 삭제
         /// </summary>
         /// <returns></returns>
-        public abstract CustomLinkedListNode<T>? Dequeue();
+        public abstract T? Dequeue();
         #endregion
     }
 }
