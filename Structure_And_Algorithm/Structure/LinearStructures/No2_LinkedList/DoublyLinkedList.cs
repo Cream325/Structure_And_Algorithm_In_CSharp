@@ -24,29 +24,29 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         {
             CustomLinkedListNode<T> newNode = new(newData);
 
-            // 헤드가 null인 경우
+            // Head가 null인 경우
             if(headNode == null)
             {
                 headNode = newNode;
                 tailNode = headNode;
+                length++;
+                return;
+            }
+
+            // Head가 Tail과 같은 경우
+            if (headNode.Equals(tailNode))
+            {
+                headNode.NextNode = newNode;
+                newNode.PreviousNode = headNode;
             }
             else
             {
-                // 헤드의 다음노드가 null인 경우, 일반적인 경우
-                if(headNode.NextNode == null)
-                {
-                    headNode.NextNode = newNode;
-                    newNode.PreviousNode = headNode;
-                }
-                else
-                {
-                    tailNode.NextNode = newNode;
-                    newNode.PreviousNode = tailNode;
-                }
-
-                tailNode = tailNode.NextNode;
+                // 일반적인 경우
+                tailNode.NextNode = newNode;
+                newNode.PreviousNode = tailNode;
             }
 
+            tailNode = tailNode.NextNode;
             length++;
         }
 
@@ -62,30 +62,32 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         #region Insert
         public override void Insert(T newData, int index)
         {
-            CustomLinkedListNode<T> newNode = new(newData);
-
-            // 헤드가 null인 경우, 인덱스가 리스트 최대 인덱스 이상인 경우 (Append와 연산이 같음)
-            if (headNode == null || index >= length-1)
+            // Head가 null인 경우, 인덱스가 length-1이상인 경우
+            if (headNode == null || index >= length - 1)
             {
                 Append(newData);
                 return;
             }
 
-            // 인덱스가 0 이하인 경우
+            CustomLinkedListNode<T> newNode = new(newData);
+
+            // 인덱스가 0이하인 경우
             if (index <= 0)
             {
                 newNode.NextNode = headNode;
                 headNode.PreviousNode = newNode;
                 headNode = newNode;
-                length++;
-                return;
+            }
+            else
+            {
+                // 일반적인 경우
+                CustomLinkedListNode<T>? currentNode = Search(index);
+                currentNode.PreviousNode.NextNode = newNode;
+                newNode.PreviousNode = currentNode.PreviousNode;
+                newNode.NextNode = currentNode;
+                currentNode.PreviousNode = newNode;
             }
 
-            // 일반적인 경우
-            CustomLinkedListNode<T>? currentNode = Search(index);
-            currentNode.PreviousNode.NextNode = newNode;
-            newNode.NextNode = currentNode;
-            currentNode.PreviousNode = newNode;
             length++;
         }
         #endregion
@@ -93,25 +95,25 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         #region Search
         public override CustomLinkedListNode<T>? Search(int index)
         {
-            CustomLinkedListNode<T>? currentNode;
+            CustomLinkedListNode<T>? currentNode = headNode;
 
-            if(index <= length/2)
+            if(currentNode != null)
             {
-                // 헤드에서 검색
-                currentNode = headNode;
-                while(currentNode.NextNode != null && --index >= 0)
+                if (index <= length / 2)
                 {
-                    currentNode = currentNode.NextNode;
+                    while (currentNode.NextNode != null && --index >= 0)
+                    {
+                        currentNode = currentNode.NextNode;
+                    }
                 }
-            }
-            else
-            {
-                // 테일에서 검색
-                int maxIndex = length - 1;
-                currentNode = tailNode;
-                while(currentNode.PreviousNode != null && --maxIndex >= index)
+                else
                 {
-                    currentNode = currentNode.PreviousNode;
+                    int maxIndex = length - 1;
+                    currentNode = tailNode;
+                    while (currentNode.PreviousNode != null && --maxIndex >= index)
+                    {
+                        currentNode = currentNode.PreviousNode;
+                    }
                 }
             }
 
@@ -122,36 +124,46 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         #region Delete
         public override CustomLinkedListNode<T>? Delete(int index)
         {
-            CustomLinkedListNode<T>? deletedNode = null;
+            // Head가 null인 경우
+            if (headNode == null)
+                return null;
 
-            if(headNode != null)
+            CustomLinkedListNode<T> deletedNode;
+            CustomLinkedListNode<T> tempNode;
+
+            // Head가 Tail과 같을 경우
+            if(headNode.Equals(tailNode))
             {
-                // 헤드를 삭제할 경우
-                if(headNode.NextNode == null || index <= 0)
+                tempNode = headNode;
+                headNode = null;
+                tailNode = null;
+            }
+            else
+            {
+                // 인덱스가 0이하일 경우
+                if(index <= 0)
                 {
-                    deletedNode = headNode;
+                    tempNode = headNode;
+                    headNode.NextNode.PreviousNode = null;
                     headNode = headNode.NextNode;
                 }
                 else
                 {
-                    index = index >= length ? length-1 : index;
-                    CustomLinkedListNode<T>? currentNode = Search(index);
+                    CustomLinkedListNode<T> currentNode = Search(index);
+                    tempNode = currentNode;
+                    currentNode.PreviousNode.NextNode = currentNode.NextNode;
 
-                    // 중간노드를 삭제할 경우
-                    if(currentNode.NextNode != null)
-                    {
-                        currentNode.PreviousNode.NextNode = currentNode.NextNode;
-                        currentNode.NextNode.PreviousNode = currentNode.PreviousNode;
-                    }
+                    // 인덱스가 length-1이상일 경우
+                    if (index >= length - 1)
+                        tailNode = currentNode.PreviousNode;
                     else
-                        // 테일을 삭제할 경우
-                        currentNode.PreviousNode.NextNode = null;
-
-                    deletedNode = currentNode;
+                        // 일반적인 경우
+                        currentNode.NextNode.PreviousNode = currentNode.PreviousNode;
                 }
-
-                length--;
             }
+
+            deletedNode = tempNode;
+            length--;
 
             return deletedNode;
         }
