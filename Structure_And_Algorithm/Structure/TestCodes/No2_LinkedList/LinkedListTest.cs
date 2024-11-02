@@ -45,7 +45,7 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
 
         #region Overrides
 
-        public void ConstructorTest(T? initialData = default)
+        public void ConstructorTest(T? initialData)
         {
             #region Function 1-1. 매개변수가 없을 경우
             if (initialData == null)
@@ -212,8 +212,7 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
             #endregion
 
             CustomLinkedListNode<T>? searchedNode = list.Search(index);
-            Console.Write($"검색된 노드 값: {(searchedNode != null ? searchedNode.Data : null)}");
-            Console.WriteLine();
+            Console.WriteLine($"검색된 노드 값: {(searchedNode != null ? searchedNode.Data : null)}");
         }
 
         public void DeleteTest(int index)
@@ -469,7 +468,7 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
             
             else if (methodName.Contains("AddPrintTest"))
                 Console.WriteLine("[출력(Print) 테스트]");
-            }
+        }
         #endregion
     }
 }
