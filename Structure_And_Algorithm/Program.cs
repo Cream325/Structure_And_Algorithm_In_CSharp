@@ -1,5 +1,6 @@
 ﻿using Structure_And_Algorithm.Structure.LinearStructures.No1_Array;
 using Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList;
+using Structure_And_Algorithm.Structure.TestCodes.No3_Stack;
 using System;
 
 namespace Structure_And_Algorithm
@@ -8,7 +9,8 @@ namespace Structure_And_Algorithm
     {
         public static void Main(string[] args)
         {
-            LinkedListExample();
+            //LinkedListExample();
+            StackExample();
         }
 
         private static void LinkedListExample()
@@ -37,6 +39,27 @@ namespace Structure_And_Algorithm
 
                                        .AddPrintTest()
                                        .Test();
+        }
+
+        private static void StackExample()
+        {
+            StackTestBuilder<int?>.CreateTest(StackType.ArrayStack, 5)
+                                  .AddPushTest(1)
+                                  .AddPushTest(2)
+                                  .AddPushTest(3)
+                                  .AddPushTest(4)
+                                  .AddPushTest(5)
+
+                                  .AddPeekTest()
+
+                                  .AddPopTest()
+                                  .AddPopTest()
+                                  .AddPopTest()
+                                  .AddPopTest()
+                                  .AddPopTest()
+                                  .AddPopTest()
+
+                                  .Test();
         }
     }
 }
