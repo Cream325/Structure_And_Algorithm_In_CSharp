@@ -2,12 +2,55 @@
 
 namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
 {
+    public class ArrayDynamic<T> : AbstractArray<T>
+    {
+        private T[] data;
+
+        public ArrayDynamic() { data = new T[0]; }
+
+
+        public bool Insert(T newData, int index)
+        {
+            if(index < data.Length) {
+                data[index] = newData;
+                return false;
+            }
+
+            return true;
+        }
+
+        public void ReSize(int newlen)
+        {
+            T[] a = new T[newlen];
+
+            for(int i = 0; i < data.Length; i++) {
+
+                a[i] = data[i];
+            }
+
+            data = a;
+        }
+
+        public T? Search(int index)
+        {
+            if(index < data.Length) {
+                return data[index];
+            }
+
+            return default;
+        }
+
+        public int Size()
+        {
+            return data.Length;
+        }
+    }
+
     /// <summary>
     /// 동적 배열
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class DynamicArray<T, K> where K : AbstractArray<T>, new() {
-
+    public class IVector<T> {
         #region Properties
         public int Capacity { get => arr.Size(); }
 
@@ -17,8 +60,8 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
 
         public AbstractArray<T> arr;
 
-        public DynamicArray() {
-            arr = new K();
+        public IVector(AbstractArray<T> a) {
+            arr = a;
         }
         
         #region Append
@@ -76,6 +119,12 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
 
             return deletedData;
         }
-        #endregion
+        #endregion   
     }
+    // charger
+    public class AbstractVector<T, K> : IVector<T> where K : AbstractArray<T>, new() {
+        public AbstractVector() : base(new K()) {}
+    }
+
+    public class ArrayVector<T> : AbstractVector<T, ArrayDynamic<T>> {} // version
 }

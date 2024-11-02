@@ -55,48 +55,4 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
             }
         }
     }
-
-    public class ArrayDynamic<T> : AbstractArray<T>
-    {
-        private T[] data;
-
-        public ArrayDynamic() { data = new T[0]; }
-
-
-        public bool Insert(T newData, int index)
-        {
-            if(index < data.Length) {
-                data[index] = newData;
-                return false;
-            }
-
-            return true;
-        }
-
-        public void ReSize(int newlen)
-        {
-            T[] a = new T[newlen];
-
-            for(int i = 0; i < data.Length; i++) {
-
-                a[i] = data[i];
-            }
-
-            data = a;
-        }
-
-        public T? Search(int index)
-        {
-            if(index < data.Length) {
-                return data[index];
-            }
-
-            return default;
-        }
-
-        public int Size()
-        {
-            return data.Length;
-        }
-    }
 }

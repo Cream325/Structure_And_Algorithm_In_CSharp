@@ -9,7 +9,7 @@ namespace Structure_And_Algorithm
     {
         public static void Main(string[] args)
         {
-            var a = new DynamicArray<int, ArrayDynamic<int>>();
+            var a = new ArrayVector<int>();
             a.arr.ReSize(23);
 
             a.Append(234);
