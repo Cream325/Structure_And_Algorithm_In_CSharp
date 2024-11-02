@@ -2,154 +2,129 @@
 
 namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
 {
+    public class ArrayDynamic<T> : AbstractArray<T>
+    {
+        private T[] data;
+
+        public ArrayDynamic() { data = new T[0]; }
+
+
+        public bool Insert(T newData, int index)
+        {
+            if(index < data.Length) {
+                data[index] = newData;
+                return false;
+            }
+
+            return true;
+        }
+
+        public void ReSize(int newlen)
+        {
+            T[] a = new T[newlen];
+
+            for(int i = 0; i < data.Length; i++) {
+
+                a[i] = data[i];
+            }
+
+            data = a;
+        }
+
+        public T? Search(int index)
+        {
+            if(index < data.Length) {
+                return data[index];
+            }
+
+            return default;
+        }
+
+        public int Size()
+        {
+            return data.Length;
+        }
+    }
+
     /// <summary>
     /// 동적 배열
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class DynamicArray<T> : AbstractArray<T>
-    {
-        #region Member Fields
+    public class IVector<T> {
+        #region Properties
+        public int Capacity { get => arr.Size(); }
+
+        #endregion
+
         private int lastIndex;
-        private T[] array;
-        #endregion
 
-        #region Construectors
-        public DynamicArray(int capacity) : base(capacity)
-        {
-            lastIndex = 0;
-            array = new T[capacity];
+        public AbstractArray<T> arr;
+
+        public IVector(AbstractArray<T> a) {
+            arr = a;
         }
-
-        public DynamicArray(int capacity, T newData) : this(capacity)
-        {
-            Append(newData);
-        }
-        #endregion
-
-        #region Overrides
-
+        
         #region Append
-        public override void Append(T newData)
-        {
-            if(lastIndex+1 >= capacity)
-                Resize(ResizeType.Extend);
+        /// <summary>
+        /// 배열 - 단일 추가
+        /// </summary>
+        /// <param name="newData"></param>
+        public void Append(T newData) {
+            if(lastIndex+1 >= Capacity) {
+                arr.ReSize(Capacity << 1);
+            }
 
-            array[lastIndex++] = newData;
+            arr.Insert(newData, lastIndex++);
         }
 
-        public override void AppendAll(T[] newDatas)
-        {
+        /// <summary>
+        /// 배열 - 전체 추가
+        /// </summary>
+        /// <param name="newDatas"></param>
+        public void AppendAll(T[] newDatas) {
             for(int i = 0; i < newDatas.Length; i++)
                 Append(newDatas[i]);
         }
+
+
         #endregion
 
-        public override void Insert(T newData, int index)
-        {
-            if (lastIndex+1 >= capacity)
-                Resize(ResizeType.Extend);
-
-            index = index < 0 ? 0 :
-                    index >= capacity ? capacity - 1 : index;
-
-            // 인덱스가 LastIndex-1이상인 경우 (Append와 같음)
-            if (index >= lastIndex)
-                array[lastIndex++] = newData;
-            else
-            {
-                // 일반적인 경우
-                for(int i = lastIndex; i >= index; i--)
-                {
-                    array[i+1] = array[i];
-                }
-
-                array[index] = newData;
-                lastIndex++;
-            }
-        }
-
-        public override T? Search(int index)
-        {
-            index = index < 0 ? 0 :
-                    index >= capacity ? capacity-1 : index;
-
-            T? searchedData = array[index] != null ? array[index] : default;
-            return searchedData;
-        }
-
-        public override T? Delete(int index)
-        {
+        #region Delete
+        /// <summary>
+        /// 배열 - 단일 삭제
+        /// </summary>
+        /// <param name="index"></param>
+        public T? Delete(int index) {
             T? deletedData = default;
 
-            if (lastIndex-1 < capacity/2)
-                Resize(ResizeType.Reduce);
+            if (lastIndex-1 < Capacity/2)
+                arr.ReSize(Capacity >> 1);
 
             index = index < 0 ? 0 :
-                    index >= capacity ? capacity - 1 : index;
+                    index >= Capacity ? Capacity - 1 : index;
 
             // 인덱스가 LastIndex-1이상인 경우
             if (index > lastIndex)
-                array[lastIndex--] = default;
+                lastIndex--;
             else
             {
                 // 일반적인 경우
-                array[index] = default;
-                deletedData = array[index];
+                // array[index] = default;
+                deletedData = arr.Search(index);
                 lastIndex--;
 
                 for (int i = index; i < lastIndex; i++)
-                {
-                    array[i] = array[i+1];
-                    array[i+1] = default;
-                }
+                    arr.Insert(arr.Search(i + 1) ?? default, i);
             }
 
             return deletedData;
         }
-
-        public override void Traversal()
-        {
-            int currentIndex = 0;
-
-            while(currentIndex < capacity &&
-                array[currentIndex] != null)
-            {
-                Console.Write($"{array[currentIndex++]} ");
-            }
-        }
-        #endregion
-
-        #region Private Functions
-        /// <summary>
-        /// 배열 크기 재조정 함수
-        /// </summary>
-        /// <param name="type"></param>
-        private void Resize(ResizeType type)
-        {
-            if (array == null)
-                return;
-
-            int length = 0;
-            switch (type)
-            {
-                case ResizeType.Extend:
-                    capacity = array.Length * 2;
-                    length = array.Length;
-                    break;
-                case ResizeType.Reduce:
-                    capacity = array.Length / 2;
-                    length = capacity;
-                    break;
-            }
-
-            T[] newArray = new T[capacity];
-            for (int i = 0; i < length; i++)
-            {
-                newArray[i] = array[i];
-            }
-
-            array = newArray;
-        }
-        #endregion
+        #endregion   
     }
+    // charger
+    public class AbstractVector<T, K> : IVector<T> where K : AbstractArray<T>, new() {
+        public AbstractVector() : base(new K()) {}
+    }
+
+    public class ArrayVector<T> : AbstractVector<T, ArrayDynamic<T>> {} // version
 }

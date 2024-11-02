@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Structure_And_Algorithm.Structure.Nodes
 {
-    public abstract class AbstractNode<T>
+    public class AbstractNode<T>
     {
         #region Member Fields
         private T? data;
@@ -24,11 +24,13 @@ namespace Structure_And_Algorithm.Structure.Nodes
         #endregion
 
         #region Constructors
+        
         public AbstractNode(T? data)
         {
             this.data = data;
             nodeList = new();
         }
+
         #endregion
     }
 }

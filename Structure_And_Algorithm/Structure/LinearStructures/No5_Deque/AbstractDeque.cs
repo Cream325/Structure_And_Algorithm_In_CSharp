@@ -1,4 +1,5 @@
-﻿using Structure_And_Algorithm.Structure.Nodes;
+﻿using Structure_And_Algorithm.Structure.LinearStructures.No1_Array;
+using Structure_And_Algorithm.Structure.Nodes;
 using Structure_And_Algorithm.Structure.Utils;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public abstract CustomLinkedListNode<T>? Pop(IOType type);
+        public abstract T? Pop(IOType type);
 
         /// <summary>
         /// 덱 - 빈 공간 여부 확인

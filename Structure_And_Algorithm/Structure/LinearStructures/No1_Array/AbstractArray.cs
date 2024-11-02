@@ -7,50 +7,20 @@ using System.Threading.Tasks;
 
 namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
 {
+
     /// <summary>
     /// 배열 추상 클래스
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class AbstractArray<T>
+    public interface AbstractArray<T>
     {
-        #region Member Fields
-        protected int capacity;
-        #endregion
-
-        #region Properties
-        public int Capacity { get => capacity; }
-        #endregion
-
-        #region Constructors
-        public AbstractArray(int capacity)
-        {
-            this.capacity = capacity;
-        }
-        #endregion
-
-        #region Abstract Functions
-
-        #region Append
-        /// <summary>
-        /// 배열 - 단일 추가
-        /// </summary>
-        /// <param name="newData"></param>
-        public abstract void Append(T newData);
-
-        /// <summary>
-        /// 배열 - 전체 추가
-        /// </summary>
-        /// <param name="newDatas"></param>
-        public abstract void AppendAll(T[] newDatas);
-        #endregion
-
         #region Insert
         /// <summary>
         /// 배열 - 단일 삽입
         /// </summary>
         /// <param name="newData"></param>
         /// <param name="index"></param>
-        public abstract void Insert(T newData, int index);
+        public abstract bool Insert(T newData, int index);
         #endregion
 
         #region Search
@@ -61,21 +31,28 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
         public abstract T? Search(int index);
         #endregion
 
-        #region Delete
-        /// <summary>
-        /// 배열 - 단일 삭제
-        /// </summary>
-        /// <param name="index"></param>
-        public abstract T? Delete(int index);
-        #endregion
-
         #region Print
-        /// <summary>
-        /// 배열 - 순회
-        /// </summary>
-        public abstract void Traversal();
+
+        public abstract int Size();
+        
         #endregion
 
+        #region Public Resize
+        /// <summary>
+        /// 배열 크기 재조정 함수
+        /// </summary>
+        /// <param name="type"></param>
+        public abstract void ReSize(int newlen);
         #endregion
+
+        public void Traversal()
+        {
+            int currentIndex = 0;
+
+            while(currentIndex < Size() && Search(currentIndex) != null)
+            {
+                Console.Write($"{Search(currentIndex++)} ");
+            }
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
         private int front = 0;
         private int back = 0;
         private int capacity;
-        private CustomLinkedListNode<T>[] array;
+        private T[] array;
         #endregion
 
         #region Properties
@@ -29,7 +29,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
         public Scroll(int capacity)
         {
             this.capacity = capacity;
-            array = new CustomLinkedListNode<T>[capacity + 1];
+            array = new T[capacity + 1];
         }
         #endregion
 
@@ -50,7 +50,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
                     position = front++;
                 }
 
-                array[position] = new CustomLinkedListNode<T>(newData);
+                array[position] = newData;
             }
             else
             {
@@ -59,7 +59,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
         }
 
         #region Pop
-        public override CustomLinkedListNode<T>? Pop(IOType type)
+        public override T? Pop(IOType type)
         {
             if (type == IOType.Front)
             {
@@ -71,7 +71,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
             }
         }
 
-        private CustomLinkedListNode<T>? PopFront()
+        private T? PopFront()
         {
             if (!IsEmpty())
             {
@@ -88,7 +88,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
             }
         }
 
-        private CustomLinkedListNode<T>? PopBack()
+        private T? PopBack()
         {
             if (!IsEmpty())
             {
