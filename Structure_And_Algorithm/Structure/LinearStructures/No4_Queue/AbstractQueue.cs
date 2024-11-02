@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Structure_And_Algorithm.Structure.LinearStructures.No1_Array;
 using Structure_And_Algorithm.Structure.Nodes;
 
 namespace Structure_And_Algorithm.Structure.Linear.Queue
@@ -13,6 +14,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
     /// <typeparam name="T"></typeparam>
     public abstract class AbstractQueue<T>
     {
+        
         #region Member Fields
         protected int front;
         protected int rear;
