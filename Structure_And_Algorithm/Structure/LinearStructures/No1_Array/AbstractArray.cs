@@ -64,12 +64,6 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
         public abstract T Delete(int index);
         #endregion
 
-        /// <summary>
-        /// 크기 재조정
-        /// </summary>
-        /// <param name="newSize"></param>
-        protected abstract void Resize(int newSize);
-
         #endregion
 
         #region Public Functions

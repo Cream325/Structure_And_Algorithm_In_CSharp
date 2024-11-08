@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Structure_And_Algorithm.Structure.LinearStructures;
 using Structure_And_Algorithm.Structure.Nodes;
 
@@ -83,7 +84,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         /// <param name="newData"></param>
         public void Append(T newData)
         {
-            Insert(newData, length - 1);
+            Insert(newData, length);
         }
 
         /// <summary>
@@ -113,7 +114,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
             {
                 Console.Write(currentNode.Data + " ");
                 currentNode = currentNode.NextNode;
-            } while (currentNode != headNode);
+            } while (currentNode != headNode && currentNode != null);
         }
         #endregion
 

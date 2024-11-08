@@ -16,7 +16,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
     {
         #region Member Fields
         private int capacity;
-        private DynamicArray<T> array;
+        private FixedArray<T> array;
         #endregion
 
         #region Properties
@@ -41,14 +41,13 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
         {
             if (!IsFull())
             {
-                array.Append(newData);
-                top++;
+                array.Insert(newData, top++);
             }
         }
 
         public override T? Peek()
         {
-            return !IsEmpty() ? array.Search(top) : default;
+            return !IsEmpty() ? array.Search(top-1) : default;
         }
 
         public override T? Pop()

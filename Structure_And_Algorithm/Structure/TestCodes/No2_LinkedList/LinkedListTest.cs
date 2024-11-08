@@ -425,7 +425,7 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
 
                 for(int i = 0; i < length; i++)
                 {
-                    Action item = actions.Dequeue().Data;
+                    Action? item = actions.Dequeue();
 
                     if (!string.Equals(item?.Method.Name, lastAction?.Method.Name))
                     {

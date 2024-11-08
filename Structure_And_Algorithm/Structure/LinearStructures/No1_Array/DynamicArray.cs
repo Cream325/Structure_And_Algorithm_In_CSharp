@@ -64,16 +64,23 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
             return deletedData;
         }
 
-        protected override void Resize(int newLength)
+        #endregion
+
+        #region Private Functions
+        /// <summary>
+        /// 크기 재조정
+        /// </summary>
+        /// <param name="newSize"></param>
+        private void Resize(int newSize)
         {
-            T[] newArray = new T[newLength];
+            T[] newArray = new T[newSize];
             for (int i = 0; i < lastIndex; i++)
             {
                 newArray[i] = array[i];
             }
 
             array = newArray;
-            capacity = newLength;
+            capacity = newSize;
         }
         #endregion
     }

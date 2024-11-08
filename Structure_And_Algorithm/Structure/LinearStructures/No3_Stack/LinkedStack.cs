@@ -44,9 +44,8 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
         {
             if(!IsEmpty())
             {
-                CustomLinkedListNode<T>? peekedNode = linkedList.Search(top);
-                if(peekedNode != null)
-                    return peekedNode.Data;
+                AbstractNode<T>? peekedNode = linkedList.Search(top);
+                if(peekedNode != null) return peekedNode.Data;
             }
 
             return default;
@@ -56,9 +55,8 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
         {
             if (!IsEmpty())
             {
-                CustomLinkedListNode<T>? poppedNode = linkedList.Delete(top--);
-                if (poppedNode != null)
-                    return poppedNode.Data;
+                AbstractNode<T>? poppedNode = linkedList.Delete(top--);
+                if (poppedNode != null) return poppedNode.Data;
             }
 
             return default;

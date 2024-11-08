@@ -1,4 +1,5 @@
-﻿using Structure_And_Algorithm.Structure.Nodes;
+﻿using Structure_And_Algorithm.Structure.LinearStructures.No1_Array;
+using Structure_And_Algorithm.Structure.Nodes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
     {
         #region Member Fields
         private int capacity;
-        private CustomLinkedListNode<T>[] array;
+        private FixedArray<T> array;
         #endregion
 
         #region Properties
@@ -26,7 +27,12 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
         public CircularQueue(int capacity) : base()
         {
             this.capacity = capacity;
-            array = new CustomLinkedListNode<T>[capacity + 1];
+            array = new(capacity + 1);
+        }
+
+        public CircularQueue(int capacity, T newData) : this(capacity)
+        {
+            Enqueue(newData);
         }
         #endregion
 
@@ -36,27 +42,29 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
             if (!IsFull())
             {
                 rear = (++rear) % capacity;
-                array[rear] = new(newData);
+                array.Insert(newData, rear);
             }
         }
 
-        public override CustomLinkedListNode<T>? Peek()
+        public override T? Peek()
         {
             if(!IsEmpty())
-                return array[front];
+            {
+                return array.Search(front);
+            }
 
-            return null;
+            return default;
         }
 
-        public override CustomLinkedListNode<T>? Dequeue()
+        public override T? Dequeue()
         {
             if(!IsEmpty())
             {
                 front = (++front) % capacity;
-                return array[front];
+                return array.Delete(front);
             }
 
-            return null;
+            return default;
         }
         #endregion
 

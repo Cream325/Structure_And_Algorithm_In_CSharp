@@ -29,11 +29,6 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
             front = 0;
             rear = 0;
         }
-
-        public AbstractQueue(T data) : this()
-        {
-            Enqueue(data);
-        }
         #endregion
 
         #region Abstract Functions
@@ -47,13 +42,13 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
         /// 큐 - 단일 검색
         /// </summary>
         /// <returns></returns>
-        public abstract CustomLinkedListNode<T>? Peek();
+        public abstract T? Peek();
 
         /// <summary>
         /// 큐 - 단일 삭제
         /// </summary>
         /// <returns></returns>
-        public abstract CustomLinkedListNode<T>? Dequeue();
+        public abstract T? Dequeue();
         #endregion
     }
 }

@@ -10,7 +10,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
     public class LinkedQueue<T> : AbstractQueue<T>
     {
         #region Member Fields
-        DoublyLinkedList<T> linkedList;
+        private DoublyLinkedList<T> linkedList;
         #endregion
 
         #region Properties
@@ -23,36 +23,32 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
             linkedList = new();
         }
 
-        public LinkedQueue(T? data) : base()
+        public LinkedQueue(T newData) : base()
         {
-            linkedList = new();
-            Enqueue(data);
+            linkedList = new(newData);
         }
         #endregion
 
         #region Overrides
-        public override void Enqueue(T? newData)
+        public override void Enqueue(T newData)
         {
             linkedList.Append(newData);
-            rear++;
         }
 
-        public override CustomLinkedListNode<T>? Peek()
+        public override T? Peek()
         {
-            CustomLinkedListNode<T>? dequeuedNode = linkedList.Search(0);
-            return dequeuedNode != null ?dequeuedNode : null;
+            AbstractNode<T>? dequeuedNode = linkedList.Search(0);
+            if(dequeuedNode != null) return dequeuedNode.Data;
+
+            return default;
         }
 
-        public override CustomLinkedListNode<T>? Dequeue()
+        public override T? Dequeue()
         {
-            CustomLinkedListNode<T>? dequeuedNode = linkedList.Delete(0);
-            if(dequeuedNode != null)
-            {
-                front++;
-                return dequeuedNode;
-            }
+            AbstractNode<T>? dequeuedNode = linkedList.Delete(0);
+            if(dequeuedNode != null) return dequeuedNode.Data;
             
-            return null;
+            return default;
         }
         #endregion
     }
