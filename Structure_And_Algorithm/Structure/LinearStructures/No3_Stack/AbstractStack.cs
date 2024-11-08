@@ -39,13 +39,13 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
         /// 스택 - 단일 검색
         /// </summary>
         /// <returns></returns>
-        public abstract CustomLinkedListNode<T>? Peek();
+        public abstract T? Peek();
         
         /// <summary>
         /// 스택 - 단일 삭제
         /// </summary>
         /// <returns></returns>
-        public abstract CustomLinkedListNode<T>? Pop();
+        public abstract T? Pop();
 
         public abstract bool IsEmpty();
 

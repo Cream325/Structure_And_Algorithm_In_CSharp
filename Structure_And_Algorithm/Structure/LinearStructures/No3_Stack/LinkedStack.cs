@@ -27,9 +27,9 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
         {
             linkedList = new();
         }
-        public LinkedStack(T data) : base()
+        public LinkedStack(T newData) : base()
         {
-            linkedList = new(data);
+            linkedList = new(newData);
         }
         #endregion
 
@@ -40,28 +40,28 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
             top++;
         }
 
-        public override CustomLinkedListNode<T>? Peek()
+        public override T? Peek()
         {
             if(!IsEmpty())
             {
-                CustomLinkedListNode<T>? peekedNode = linkedList.Search(linkedList.Length - 1);
+                CustomLinkedListNode<T>? peekedNode = linkedList.Search(top);
                 if(peekedNode != null)
-                    return peekedNode;
+                    return peekedNode.Data;
             }
 
-            return null;
+            return default;
         }
 
-        public override CustomLinkedListNode<T>? Pop()
+        public override T? Pop()
         {
             if (!IsEmpty())
             {
-                CustomLinkedListNode<T>? poppedNode = linkedList.Delete(linkedList.Length - 1);
+                CustomLinkedListNode<T>? poppedNode = linkedList.Delete(top--);
                 if (poppedNode != null)
-                    return poppedNode;
+                    return poppedNode.Data;
             }
 
-            return null;
+            return default;
         }
 
         public override bool IsEmpty()

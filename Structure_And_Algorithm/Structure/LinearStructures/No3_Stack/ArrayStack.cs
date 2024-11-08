@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Structure_And_Algorithm.Structure.LinearStructures.No1_Array;
 using Structure_And_Algorithm.Structure.Nodes;
 
 namespace Structure_And_Algorithm.Structure.Linear.Stack
@@ -15,7 +16,7 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
     {
         #region Member Fields
         private int capacity;
-        private CustomLinkedListNode<T>?[] array;
+        private DynamicArray<T> array;
         #endregion
 
         #region Properties
@@ -26,12 +27,12 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
         public ArrayStack(int capacity) : base()
         {
             this.capacity = capacity;
-            array = new CustomLinkedListNode<T>?[capacity];
+            array = new(capacity);
         }
 
-        public ArrayStack(int capacity, T data) : this(capacity)
+        public ArrayStack(int capacity, T newData) : this(capacity)
         {
-            Push(data);
+            Push(newData);
         }
         #endregion
 
@@ -39,17 +40,20 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
         public override void Push(T newData)
         {
             if (!IsFull())
-                array[top++] = new(newData);
+            {
+                array.Append(newData);
+                top++;
+            }
         }
 
-        public override CustomLinkedListNode<T>? Peek()
+        public override T? Peek()
         {
-            return !IsEmpty() ? array[top-1] : default;
+            return !IsEmpty() ? array.Search(top) : default;
         }
 
-        public override CustomLinkedListNode<T>? Pop()
+        public override T? Pop()
         {
-            return !IsEmpty() ? array[--top] : default;
+            return !IsEmpty() ? array.Delete(top--) : default;
         }
 
         public override bool IsEmpty()

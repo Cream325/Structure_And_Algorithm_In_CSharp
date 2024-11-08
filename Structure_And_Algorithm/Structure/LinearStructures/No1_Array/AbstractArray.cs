@@ -11,10 +11,12 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
     /// 배열 추상 클래스
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class AbstractArray<T>
+    public abstract class AbstractArray<T> : ILinearStructure<T, T>
     {
         #region Member Fields
         protected int capacity;
+        protected int lastIndex;
+        protected T[] array;
         #endregion
 
         #region Properties
@@ -25,24 +27,17 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
         public AbstractArray(int capacity)
         {
             this.capacity = capacity;
+            this.lastIndex = 0;
+            this.array = new T[capacity];
+        }
+
+        public AbstractArray(int capacity, T newData) : this(capacity)
+        {
+            Append(newData);
         }
         #endregion
 
         #region Abstract Functions
-
-        #region Append
-        /// <summary>
-        /// 배열 - 단일 추가
-        /// </summary>
-        /// <param name="newData"></param>
-        public abstract void Append(T newData);
-
-        /// <summary>
-        /// 배열 - 전체 추가
-        /// </summary>
-        /// <param name="newDatas"></param>
-        public abstract void AppendAll(T[] newDatas);
-        #endregion
 
         #region Insert
         /// <summary>
@@ -58,7 +53,7 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
         /// 배열 - 단일 검색
         /// </summary>
         /// <param name="index"></param>
-        public abstract T? Search(int index);
+        public abstract T Search(int index);
         #endregion
 
         #region Delete
@@ -66,14 +61,57 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
         /// 배열 - 단일 삭제
         /// </summary>
         /// <param name="index"></param>
-        public abstract T? Delete(int index);
+        public abstract T Delete(int index);
+        #endregion
+
+        /// <summary>
+        /// 크기 재조정
+        /// </summary>
+        /// <param name="newSize"></param>
+        protected abstract void Resize(int newSize);
+
+        #endregion
+
+        #region Public Functions
+
+        #region Append
+        /// <summary>
+        /// 배열 - 단일 추가
+        /// </summary>
+        /// <param name="newData"></param>
+        public void Append(T newData)
+        {
+            Insert(newData, lastIndex);
+        }
+
+        /// <summary>
+        /// 배열 - 전체 추가
+        /// </summary>
+        /// <param name="newDatas"></param>
+        public void AppendAll(T[] newDatas)
+        {
+            for(int i = 0; i < newDatas.Length; i++)
+            {
+                Append(newDatas[i]);
+            }
+        }
         #endregion
 
         #region Print
         /// <summary>
         /// 배열 - 순회
         /// </summary>
-        public abstract void Traversal();
+        public void Traversal()
+        {
+            if(capacity == 0) return;
+
+            int currentIndex = 0;
+
+            while (array[currentIndex] != null)
+            {
+                Console.Write($"{array[currentIndex++]} ");
+            }
+        }
         #endregion
 
         #endregion

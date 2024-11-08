@@ -119,8 +119,8 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No3_Stack
 
             #endregion
 
-            CustomLinkedListNode<T>? searchedNode = stack.Peek();
-            Console.WriteLine($"검색된 노드 값: {(searchedNode != null ? searchedNode.Data : null)}");
+            T? searchedData = stack.Peek();
+            Console.WriteLine($"검색된 노드 값: {searchedData}");
         }
 
         public void PopTest()
@@ -142,8 +142,8 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No3_Stack
 
             #endregion
 
-            CustomLinkedListNode<T>? deletedNode = stack.Pop();
-            Console.WriteLine($"삭제된 노드 값: {(deletedNode != null ? deletedNode.Data : null)}");
+            T? deletedData = stack.Pop();
+            Console.WriteLine($"삭제된 노드 값: {deletedData}");
         }
         #endregion
     }
