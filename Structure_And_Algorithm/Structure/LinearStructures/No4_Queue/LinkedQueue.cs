@@ -37,18 +37,12 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
 
         public override T? Peek()
         {
-            AbstractNode<T>? dequeuedNode = linkedList.Search(0);
-            if(dequeuedNode != null) return dequeuedNode.Data;
-
-            return default;
+            return linkedList.Search(0);
         }
 
         public override T? Dequeue()
         {
-            AbstractNode<T>? dequeuedNode = linkedList.Delete(0);
-            if(dequeuedNode != null) return dequeuedNode.Data;
-            
-            return default;
+            return linkedList.Delete(0);
         }
         #endregion
     }

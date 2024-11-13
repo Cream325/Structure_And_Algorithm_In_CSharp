@@ -1,4 +1,6 @@
 ﻿using Structure_And_Algorithm.Structure.Linear.LinkedList;
+using Structure_And_Algorithm.Structure.Linear.Queue;
+using Structure_And_Algorithm.Structure.Linear.Stack;
 using Structure_And_Algorithm.Structure.Nodes;
 using Structure_And_Algorithm.Structure.Utils;
 using System;
@@ -15,114 +17,43 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
     /// <typeparam name="T"></typeparam>
     public class LinkedDeque<T> : AbstractDeque<T>
     {
-        #region Member Fields
-        DoublyLinkedList<T> linkedList;
-        #endregion
-
         #region Constructors
         public LinkedDeque()
         {
-            linkedList = new();
-        }
-
-        public LinkedDeque(T? data, IOType type)
-        {
-            linkedList = new();
-            Push(data, type);
+            stack = new LinkedStack<T>();
+            queue = new LinkedQueue<T>();
         }
         #endregion
 
         #region Overrides
-
-        #region Push
-        public override void Push(T? newData, IOType type)
+        public override void PushFront(T newData)
         {
-            if (type == IOType.Front)
-            {
-                PushFront(newData);
-            }
-            else
-            {
-                PushBack(newData);
-            }
+            queue.Enqueue(newData);
         }
 
-        private void PushFront(T? newData)
+        public override void PushBack(T newData)
         {
-            linkedList.Insert(newData, 0);
+            stack.Push(newData);
         }
 
-        private void PushBack(T? newData)
+        public override T? PeekFront()
         {
-            linkedList.Append(newData);
-        }
-        #endregion
-
-        #region Pop
-        public override CustomLinkedListNode<T>? Pop(IOType type)
-        {
-            if (type == IOType.Front)
-            {
-                return PopFront();
-            }
-            else
-            {
-                return PopBack();
-            }
+            return queue.Peek();
         }
 
-        private CustomLinkedListNode<T>? PopFront()
+        public override T? PeekBack()
         {
-            if (!IsEmpty())
-            {
-                return linkedList.Delete(0);
-            }
-            else
-            {
-                return null;
-            }
+            return stack.Peek();
         }
 
-        private CustomLinkedListNode<T>? PopBack()
+        public override T? PopFront()
         {
-            if (!IsEmpty())
-            {
-                return linkedList.Delete(linkedList.Length - 1);
-            }
-            else
-            {
-                return null;
-            }
-        }
-        #endregion
-
-        public CustomLinkedListNode<T>? Front()
-        {
-            if (!IsEmpty())
-            {
-                return linkedList.Search(0);
-            }
-            else
-            {
-                return null;
-            }
+            return queue.Dequeue();
         }
 
-        public CustomLinkedListNode<T>? Back()
+        public override T? PopBack()
         {
-            if (!IsEmpty())
-            {
-                return linkedList.Search(linkedList.Length - 1);
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public override bool IsEmpty()
-        {
-            return linkedList.Length == 0;
+            return stack.Pop();
         }
         #endregion
     }

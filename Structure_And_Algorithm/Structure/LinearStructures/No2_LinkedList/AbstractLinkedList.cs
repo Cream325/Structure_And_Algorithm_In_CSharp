@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Structure_And_Algorithm.Structure.LinearStructures;
 using Structure_And_Algorithm.Structure.Nodes;
+using Structure_And_Algorithm.Structure.Utils;
 
 namespace Structure_And_Algorithm.Structure.Linear.LinkedList
 {
@@ -9,7 +10,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
     /// 연결 리스트 추상 클래스
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class AbstractLinkedList<T> : ILinearStructure<T, CustomLinkedListNode<T>>
+    public abstract class AbstractLinkedList<T> : ILinearable<T>, INodeAvailable<T>
     {
         #region Member Fields
         protected CustomLinkedListNode<T>? headNode;
@@ -46,6 +47,39 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         }
         #endregion
 
+        #region Overrides
+        /// <summary>
+        /// 연결 리스트 - 단일 검색
+        /// </summary>
+        /// <param name="index"></param>
+        public T Search(int index)
+        {
+            AbstractNode<T> searchedNode = SearchNode(index);
+            if (searchedNode != null)
+                return searchedNode.Data;
+
+            return default;
+        }
+
+        public  bool CheckIndex(int index)
+        {
+            if (index < 0)
+                throw new RuntimeException(ErrorCode.UnderflowedIndex, "인덱스가 0미만이 될 수 없습니다.");
+            else if (index > 1 && index >= length)
+                throw new RuntimeException(ErrorCode.OverflowedIndex, "인덱스가 최대 길이 이상이 될 수 없습니다.");
+
+            return true;
+        }
+
+        public bool CheckIsHeaderNull(AbstractNode<T>? header)
+        {
+            if (header == null)
+                throw new RuntimeException(ErrorCode.NullOfHeader, "Head가 null이 될 수 없습니다.");
+
+            return true;
+        }
+        #endregion
+
         #region Abstract Functions
 
         #region Insert
@@ -59,10 +93,10 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
 
         #region Search
         /// <summary>
-        /// 연결 리스트 - 단일 검색
+        /// 연결 리스트 - 단일 노드 검색
         /// </summary>
         /// <param name="index"></param>
-        public abstract CustomLinkedListNode<T> Search(int index);
+        public abstract AbstractNode<T> SearchNode(int index);
         #endregion
 
         #region Delete
@@ -70,7 +104,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         /// 연결 리스트 - 단일 삭제
         /// </summary>
         /// <param name="index"></param>
-        public abstract CustomLinkedListNode<T> Delete(int index);
+        public abstract T Delete(int index);
         #endregion
 
         #endregion
@@ -84,7 +118,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         /// <param name="newData"></param>
         public void Append(T newData)
         {
-            Insert(newData, length);
+            Insert(newData, length - 1);
         }
 
         /// <summary>
@@ -106,7 +140,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         /// </summary>
         public void Traversal()
         {
-            if(headNode == null) return;
+            CheckIsHeaderNull(headNode);
 
             CustomLinkedListNode<T> currentNode = headNode;
 

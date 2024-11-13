@@ -1,10 +1,7 @@
-﻿using Structure_And_Algorithm.Structure.Nodes;
+﻿using Structure_And_Algorithm.Structure.Linear.Queue;
+using Structure_And_Algorithm.Structure.Linear.Stack;
+using Structure_And_Algorithm.Structure.Nodes;
 using Structure_And_Algorithm.Structure.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Structure_And_Algorithm.Structure.Linear.Deque
 {
@@ -14,26 +11,47 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
     /// <typeparam name="T"></typeparam>
     public abstract class AbstractDeque<T>
     {
+        #region Member Fields
+        protected AbstractStack<T> stack;
+        protected AbstractQueue<T> queue;
+        #endregion
+
         #region Abstract Functions
         /// <summary>
-        /// 덱 - 단일 추가
+        /// 덱 - 단일 추가(전단)
         /// </summary>
         /// <param name="newData"></param>
-        /// <param name="type"></param>
-        public abstract void Push(T? newData, IOType type);
+        public abstract void PushFront(T newData);
 
         /// <summary>
-        /// 덱 - 단일 삭제
+        /// 덱 - 단일 추가(후단)
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public abstract CustomLinkedListNode<T>? Pop(IOType type);
+        /// <param name="newData"></param>
+        public abstract void PushBack(T newData);
 
         /// <summary>
-        /// 덱 - 빈 공간 여부 확인
+        /// 덱 - 단일 검색(전단)
         /// </summary>
         /// <returns></returns>
-        public abstract bool IsEmpty();
+        public abstract T? PeekFront();
+
+        /// <summary>
+        /// 덱 - 단일 검색(후단)
+        /// </summary>
+        /// <returns></returns>
+        public abstract T? PeekBack();
+
+        /// <summary>
+        /// 덱 - 단일 삭제(전단)
+        /// </summary>
+        /// <returns></returns>
+        public abstract T? PopFront();
+
+        /// <summary>
+        /// 덱 - 단일 삭제(후단)
+        /// </summary>
+        /// <returns></returns>
+        public abstract T? PopBack();
         #endregion
     }
 }

@@ -1,4 +1,6 @@
-﻿using Structure_And_Algorithm.Structure.Nodes;
+﻿using Structure_And_Algorithm.Structure.Linear.Queue;
+using Structure_And_Algorithm.Structure.Linear.Stack;
+using Structure_And_Algorithm.Structure.Nodes;
 using Structure_And_Algorithm.Structure.Utils;
 using System;
 using System.Collections.Generic;
@@ -14,113 +16,43 @@ namespace Structure_And_Algorithm.Structure.Linear.Deque
     /// <typeparam name="T"></typeparam>
     public class Scroll<T> : AbstractDeque<T>
     {
-        #region Member Fields
-        private int front = 0;
-        private int back = 0;
-        private int capacity;
-        private CustomLinkedListNode<T>[] array;
-        #endregion
-
-        #region Properties
-        public int Capacity { get => capacity; }
-        #endregion
-
         #region Constructors
         public Scroll(int capacity)
         {
-            this.capacity = capacity;
-            array = new CustomLinkedListNode<T>[capacity + 1];
+            stack = new ArrayStack<T>(capacity);
+            queue = new CircularQueue<T>(capacity);
         }
         #endregion
 
         #region Overrides
-        public override void Push(T? newData, IOType type = IOType.Front)
+        public override void PushFront(T newData)
         {
-            if (!IsFull())
-            {
-                int position = 0;
-
-                if (front == capacity)
-                {
-                    position = front;
-                    front = 0;
-                }
-                else
-                {
-                    position = front++;
-                }
-
-                array[position] = new CustomLinkedListNode<T>(newData);
-            }
-            else
-            {
-                throw new IndexOutOfRangeException();
-            }
+            queue.Enqueue(newData);
         }
 
-        #region Pop
-        public override CustomLinkedListNode<T>? Pop(IOType type)
+        public override void PushBack(T newData)
         {
-            if (type == IOType.Front)
-            {
-                return PopFront();
-            }
-            else
-            {
-                return PopBack();
-            }
+            stack.Push(newData);
         }
 
-        private CustomLinkedListNode<T>? PopFront()
+        public override T? PeekFront()
         {
-            if (!IsEmpty())
-            {
-                if (front == 0)
-                {
-                    front = capacity;
-                }
-
-                return array[--front];
-            }
-            else
-            {
-                throw new IndexOutOfRangeException();
-            }
+            return queue.Peek();
         }
 
-        private CustomLinkedListNode<T>? PopBack()
+        public override T? PeekBack()
         {
-            if (!IsEmpty())
-            {
-                if (back == capacity)
-                {
-                    back = 0;
-                }
-
-                return array[back++];
-            }
-            else
-            {
-                throw new IndexOutOfRangeException();
-            }
-        }
-        #endregion
-
-        public override bool IsEmpty()
-        {
-            return front == back;
+            return stack.Peek();
         }
 
-        public bool IsFull()
+        public override T? PopFront()
         {
-            int index = back - 1;
+            return queue.Dequeue();
+        }
 
-            if (index == -1)
-            {
-                index = capacity;
-            }
-
-            return front % capacity == back && index == front;
+        public override T? PopBack()
+        {
+            return stack.Pop();
         }
         #endregion
     }

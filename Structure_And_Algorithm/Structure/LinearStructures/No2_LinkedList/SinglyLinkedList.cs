@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Structure_And_Algorithm.Structure.Nodes;
+using Structure_And_Algorithm.Structure.Utils;
 
 namespace Structure_And_Algorithm.Structure.Linear.LinkedList
 {
@@ -30,29 +31,34 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
                 headNode = newNode;
                 tailNode = headNode;
             }
-            else if (index <= 0)
-            {
-                //인덱스가 0이하인 경우
-                newNode.NextNode = headNode;
-                headNode = newNode;
-            }
-            else if (index >= length - 1)
-            {
-                // 인덱스가 length-1이상인 경우
-                if(headNode.Equals(tailNode))
-                    headNode.NextNode = newNode;
-                else
-                    tailNode.NextNode = newNode;
-
-                tailNode = newNode;
-            }
             else
             {
-                // 일반적인 경우
-                CustomLinkedListNode<T> currentNode = Search(index - 1);
-                CustomLinkedListNode<T> tempNode = currentNode.NextNode;
-                currentNode.NextNode = newNode;
-                newNode.NextNode = tempNode;
+                CheckIndex(index);
+
+                if (index == 0 && length > 1)
+                {
+                    //인덱스가 0인 경우
+                    newNode.NextNode = headNode;
+                    headNode = newNode;
+                }
+                else if (index == length - 1)
+                {
+                    // 인덱스가 length-1인 경우
+                    if (headNode.Equals(tailNode))
+                        headNode.NextNode = newNode;
+                    else
+                        tailNode.NextNode = newNode;
+
+                    tailNode = newNode;
+                }
+                else
+                {
+                    // 일반적인 경우
+                    CustomLinkedListNode<T> currentNode = SearchNode(index - 1);
+                    CustomLinkedListNode<T> tempNode = currentNode.NextNode;
+                    currentNode.NextNode = newNode;
+                    newNode.NextNode = tempNode;
+                }
             }
 
             length++;
@@ -60,9 +66,10 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         #endregion
 
         #region Search
-        public override CustomLinkedListNode<T> Search(int index)
+        public override CustomLinkedListNode<T> SearchNode(int index)
         {
-            if(headNode == null) return null;
+            CheckIsHeaderNull(headNode);
+            CheckIndex(index);
 
             CustomLinkedListNode<T> currentNode = headNode;
 
@@ -76,10 +83,10 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         #endregion
 
         #region Delete
-        public override CustomLinkedListNode<T> Delete(int index)
+        public override T Delete(int index)
         {
-            // Head가 null인 경우
-            if (headNode == null) return null;
+            CheckIsHeaderNull(headNode);
+            CheckIndex(index);
 
             CustomLinkedListNode<T> deletedNode;
             CustomLinkedListNode<T> tempNode;
@@ -91,17 +98,16 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
                 headNode = null;
                 tailNode = null;
             }
-            else if (index <= 0)
+            else if (index == 0)
             {
-                // 인덱스가 0이하일 경우
+                // 인덱스가 0일 경우
                 tempNode = headNode;
                 headNode = headNode.NextNode;
             }
             else
             {
-                // 인덱스가 length-1이상일 경우, 일반적인 경우
-                index = index >= length - 1 ? length - 1 : index;
-                CustomLinkedListNode<T> currentNode = Search(index - 1);
+                // 인덱스가 length-1일 경우, 일반적인 경우
+                CustomLinkedListNode<T> currentNode = SearchNode(index - 1);
                 tempNode = currentNode.NextNode;
                 currentNode.NextNode = tempNode.NextNode;
                 tailNode = currentNode;
@@ -110,7 +116,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
             deletedNode = tempNode;
             length--;
 
-            return deletedNode;
+            return deletedNode.Data;
         }
         #endregion
 

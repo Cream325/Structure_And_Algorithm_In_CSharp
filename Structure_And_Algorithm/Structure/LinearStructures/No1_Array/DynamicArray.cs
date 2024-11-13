@@ -16,15 +16,15 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
 
         #region Overrides
 
+        #region Insert
         public override void Insert(T newData, int index)
         {
-            if (lastIndex + 1 >= capacity)
+            CheckIndex(index);
+
+            if (lastIndex + 1 == capacity)
             {
                 Resize(array.Length * 2);
             }
-
-            index = index < 0 ? 0 :
-                    index >= capacity ? capacity - 1 : index;
 
             for(int i = lastIndex; i >= index; i--)
                 {
@@ -34,24 +34,27 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
             array[index] = newData;
             lastIndex++;
         }
+        #endregion
 
+        #region Search
         public override T Search(int index)
         {
-            index = index < 0 ? 0 :
-                    index >= capacity ? capacity-1 : index;
+            CheckIndex(index);
 
             return array[index];
         }
+        #endregion
 
+        #region Delete
         public override T Delete(int index)
         {
+            CheckIndex(index);
+
             if (lastIndex - 1 < capacity / 2)
             {
                 Resize(capacity / 2);
             }
 
-            index = index < 0 ? 0 :
-                    index >= capacity ? capacity - 1 : index;
             T deletedData = array[index];
 
             for (int i = index; i < lastIndex; i++)
@@ -63,6 +66,7 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
 
             return deletedData;
         }
+        #endregion
 
         #endregion
 

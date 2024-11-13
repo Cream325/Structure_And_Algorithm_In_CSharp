@@ -42,24 +42,12 @@ namespace Structure_And_Algorithm.Structure.Linear.Stack
 
         public override T? Peek()
         {
-            if(!IsEmpty())
-            {
-                AbstractNode<T>? peekedNode = linkedList.Search(top);
-                if(peekedNode != null) return peekedNode.Data;
-            }
-
-            return default;
+            return !IsEmpty() ? linkedList.Search(top) : default;
         }
 
         public override T? Pop()
         {
-            if (!IsEmpty())
-            {
-                AbstractNode<T>? poppedNode = linkedList.Delete(top--);
-                if (poppedNode != null) return poppedNode.Data;
-            }
-
-            return default;
+            return !IsEmpty() ? linkedList.Delete(top--) : default;
         }
 
         public override bool IsEmpty()

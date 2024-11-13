@@ -1,4 +1,5 @@
 ﻿using Structure_And_Algorithm.Structure.Nodes;
+using Structure_And_Algorithm.Structure.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
     /// 배열 추상 클래스
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class AbstractArray<T> : ILinearStructure<T, T>
+    public abstract class AbstractArray<T> : ILinearable<T>
     {
         #region Member Fields
         protected int capacity;
@@ -34,6 +35,18 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
         public AbstractArray(int capacity, T newData) : this(capacity)
         {
             Append(newData);
+        }
+        #endregion
+
+        #region Overrides
+        public bool CheckIndex(int index)
+        {
+            if (index < 0)
+                throw new RuntimeException(ErrorCode.UnderflowedIndex, "인덱스가 0미만이 될 수 없습니다.");
+            else if (index >= capacity)
+                throw new RuntimeException(ErrorCode.OverflowedIndex, "인덱스가 최대 길이 이상이 될 수 없습니다.");
+
+            return true;
         }
         #endregion
 
