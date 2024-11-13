@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Structure_And_Algorithm.Structure.Utils
 {
     /// <summary>
-    /// 로그 레벨ㄴ
+    /// 로그 레벨
     /// </summary>
     public enum LogLevel
     {
