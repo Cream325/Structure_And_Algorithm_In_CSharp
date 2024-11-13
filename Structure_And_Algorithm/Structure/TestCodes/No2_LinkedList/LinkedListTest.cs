@@ -1,13 +1,7 @@
 ﻿using Structure_And_Algorithm.Structure.Linear.LinkedList;
 using Structure_And_Algorithm.Structure.Linear.Queue;
 using Structure_And_Algorithm.Structure.Nodes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Collections.Specialized.BitVector32;
-using static System.Net.Mime.MediaTypeNames;
+using Structure_And_Algorithm.Structure.Utils;
 
 namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
 {
@@ -118,166 +112,109 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
 
         public void InsertTest(T newData, int index)
         {
-            #region 동작 테스트
-            if (index >= 0 && index <= list.Length-1)
+            try
             {
-                //Console.WriteLine("-> 동작 테스트");
+                list.Insert(newData, index);
 
-                #region Function 1-1. 인덱스가 0초과 Length-1미만일 때
                 if (index > 0 && index < list.Length - 1)
                     Console.WriteLine("-> Function 1-1. 인덱스가 0초과 Length-1미만일 때");
-                #endregion
-
-                #region Function 1-2. 인덱스가 0일 때
-                if (index == 0)
+                
+                else if (index == 0)
                     Console.WriteLine("-> Function 1-2. 인덱스가 0일 때");
-                #endregion
-
-                #region Function 1-3. 인덱스가 Length-1일 때
-                if (index == list.Length - 1)
+                
+                else if (index == list.Length - 1)
                     Console.WriteLine("-> Function 1-3. 인덱스가 Length-1일 때");
-                #endregion
+            }
+            catch(RuntimeException rex)
+            {
+                if(rex.Code == ErrorCode.UnderflowedIndex)
+                    Console.WriteLine("-> Exception 2-1. 인덱스가 0미만일 때");
+                
+                else if (rex.Code == ErrorCode.OverflowedIndex)
+                    Console.WriteLine("-> Exception 2-2. 인덱스가 Length-1초과일 때");
             }
 
-            #endregion
-
-            #region 예외처리 테스트
-            //Console.WriteLine("-> 예외처리 테스트");
-
-            #region Exception 1. 헤더가 null일 때
-            if (list.HeadNode == null)
-                Console.WriteLine("-> Exception 1. 헤더가 null일 때");
-            #endregion
-
-            #region Exception 2-1. 인덱스가 0미만일 때
-            if (index < 0)
-                Console.WriteLine("-> Exception 2-1. 인덱스가 0미만일 때");
-            #endregion
-
-            #region Exception 2-2. 인덱스가 Length-1초과일 때
-            if (index > list.Length - 1)
-                Console.WriteLine("-> Exception 2-2. 인덱스가 Length-1초과일 때");
-            #endregion
-
-            #endregion
-
-            list.Insert(newData, index);
             Console.WriteLine($"인덱스: {index}");
             Console.WriteLine($"삽입된 값: {newData}");
         }
 
         public void SearchTest(int index)
         {
-            #region 동작 테스트
-            if (index >= 0 && index <= list.Length-1)
-            {
-                //Console.WriteLine("-> 동작 테스트");
+            CustomLinkedListNode<T>? searchedNode = null;
 
-                #region Function 1-1. 인덱스가 0초과 Length-1미만일 때
+            try
+            {
+                searchedNode = (CustomLinkedListNode<T>?)list.SearchNode(index);
+
                 if (index > 0 && index < list.Length - 1)
                     Console.WriteLine("-> Function 1-1. 인덱스가 0초과 Length-1미만일 때");
-                #endregion
 
-                #region Function 1-2. 인덱스가 0일 때
-                if (index == 0)
+                else if (index == 0)
                     Console.WriteLine("-> Function 1-2. 인덱스가 0일 때");
-                #endregion
 
-                #region Function 1-3. 인덱스가 Length-1일 때
-                if (index == list.Length - 1)
+                else if (index == list.Length - 1)
                     Console.WriteLine("-> Function 1-3. 인덱스가 Length-1일 때");
-                #endregion
+            }
+            catch (RuntimeException rex)
+            {
+                if (rex.Code == ErrorCode.NullOfHeader)
+                    Console.WriteLine("-> Exception 1. 헤더가 null일 때");
+
+                else if (rex.Code == ErrorCode.UnderflowedIndex)
+                    Console.WriteLine("-> Exception 2-1. 인덱스가 0미만일 때");
+
+                else if (rex.Code == ErrorCode.OverflowedIndex)
+                    Console.WriteLine("-> Exception 2-2. 인덱스가 Length-1초과일 때");
             }
 
-            #endregion
-
-            #region 예외처리 테스트
-            //Console.WriteLine("-> 예외처리 테스트");
-
-            #region Exception 1. 헤더가 null일 때
-            if (list.HeadNode == null)
-                Console.WriteLine("-> Exception 1. 헤더가 null일 때");
-            #endregion
-
-            #region Exception 2-1. 인덱스가 0미만일 때
-            if (index < 0)
-                Console.WriteLine("-> Exception 2-1. 인덱스가 0미만일 때");
-            #endregion
-
-            #region Exception 2-2. 인덱스가 Length-1초과일 때
-            if (index > list.Length-1)
-                Console.WriteLine("-> Exception 2-2. 인덱스가 Length-1초과일 때");
-            #endregion
-
-            #endregion
-
-            CustomLinkedListNode<T>? searchedNode = list.Search(index);
             Console.WriteLine($"검색된 노드 값: {(searchedNode != null ? searchedNode.Data : null)}");
         }
 
         public void DeleteTest(int index)
         {
-            #region 동작 테스트
-            if (index >= 0 && index <= list.Length - 1)
-            {
-                //Console.WriteLine("-> 동작 테스트");
+            T? deletedData = default;
 
-                #region Function 1-1. 인덱스가 0초과 Length-1미만일 때
+            try
+            {
+                deletedData = list.Delete(index);
+
                 if (index > 0 && index < list.Length - 1)
                     Console.WriteLine("-> Function 1-1. 인덱스가 0초과 Length-1미만일 때");
-                #endregion
 
-                #region Function 1-2. 인덱스가 0일 때
-                if (index == 0)
+                else if (index == 0)
                     Console.WriteLine("-> Function 1-2. 인덱스가 0일 때");
-                #endregion
 
-                #region Function 1-3. 인덱스가 Length-1일 때
-                if (index == list.Length-1)
+                else if (index == list.Length - 1)
                     Console.WriteLine("-> Function 1-3. 인덱스가 Length-1일 때");
-                #endregion
-
             }
-            #endregion
+            catch (RuntimeException rex)
+            {
+                if (rex.Code == ErrorCode.NullOfHeader)
+                    Console.WriteLine("-> Exception 1. 헤더가 null일 때");
 
-            #region 예외처리 테스트
-            //Console.WriteLine("-> 예외처리 테스트");
+                else if (rex.Code == ErrorCode.UnderflowedIndex)
+                    Console.WriteLine("-> Exception 2-1. 인덱스가 0미만일 때");
 
-            #region Exception 1. 헤더가 null일 때
-            if (list.HeadNode == null)
-                Console.WriteLine("-> Exception 1. Header가 null일 때");
-            #endregion
+                else if (rex.Code == ErrorCode.OverflowedIndex)
+                    Console.WriteLine("-> Exception 2-2. 인덱스가 Length-1초과일 때");
+            }
 
-            #region Exception 2-1. 인덱스가 0미만일 때
-            if (index < 0)
-                Console.WriteLine("-> Exception 2-1. 인덱스가 0미만일 때");
-            #endregion
-
-            #region Exception 2-2. 인덱스가 Length-1초과일 때
-            if (index > list.Length-1)
-                Console.WriteLine("-> Exception 2-2. 인덱스가 Length-1초과일 때");
-            #endregion
-
-            #endregion
-
-            CustomLinkedListNode<T>? deletedNode = list.Delete(index);
             Console.WriteLine($"인덱스: {index}");
-            Console.WriteLine($"삭제된 노드 값: {(deletedNode != null ? deletedNode.Data : null)}");
+            Console.WriteLine($"삭제된 노드 값: {deletedData}");
         }
 
         public void PrintTest()
         {
-            #region 예외처리 테스트
+            try
+            {
+                list.Traversal();
+            }
+            catch (RuntimeException rex)
+            {
+                if (rex.Code == ErrorCode.NullOfHeader)
+                    Console.WriteLine("-> Exception 1. 헤더가 null일 때");
+            }
 
-            #region Exception 1. 헤더가 null일 때
-            if (list.HeadNode == null)
-                Console.WriteLine("-> Exception 1. Header가 null일 때");
-            #endregion
-
-            #endregion
-
-            Console.Write("현재 리스트: ");
-            list.Traversal();
             Console.WriteLine();
         }
 
