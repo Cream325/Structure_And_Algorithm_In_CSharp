@@ -13,7 +13,7 @@ namespace Structure_And_Algorithm.Structure.Utils
     public class RuntimeException : Exception
     {
         #region Member Fields
-        private int code = 0;
+        private ErrorCode code = ErrorCode.Ok;
         private string? errorMessage = string.Empty;
         #endregion
 
@@ -21,7 +21,7 @@ namespace Structure_And_Algorithm.Structure.Utils
         /// <summary>
         /// 에러 코드
         /// </summary>
-        public int Code { get => code; set => code = value; }
+        public ErrorCode Code { get => code; set => code = value; }
 
         /// <summary>
         /// 에러 메시지
@@ -32,11 +32,19 @@ namespace Structure_And_Algorithm.Structure.Utils
         #region Constructors
         public RuntimeException() { }
 
-        public RuntimeException(string? message) : base(message) { }
+        public RuntimeException(string? errorMessage) : base(errorMessage)
+        {
+            this.code = ErrorCode.Ok;
+            this.errorMessage = errorMessage;
+        }
 
-        public RuntimeException(int code, string? message) : base(message) { }
+        public RuntimeException(ErrorCode code, string? errorMessage) : base(errorMessage)
+        {
+            this.code = code;
+            this.errorMessage = errorMessage;
+        }
 
-        public RuntimeException(int code, string? message, Exception? innerException) : base(message, innerException) { }
+        public RuntimeException(ErrorCode code, string? errorMessage, Exception? innerException) : base(errorMessage, innerException) { }
         #endregion
     }
 }
