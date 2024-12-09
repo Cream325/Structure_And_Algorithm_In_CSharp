@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Structure_And_Algorithm.Structure.LinearStructures
+namespace Structure_And_Algorithm.Structure
 {
     /// <summary>
     /// 선형 자료구조 인터페이스
@@ -25,35 +25,19 @@ namespace Structure_And_Algorithm.Structure.LinearStructures
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public T Search(int index);
+        public T? Search(int index);
 
         /// <summary>
         /// 단일 삭제
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public T Delete(int index);
+        public T? Delete(int index);
 
         /// <summary>
         /// 인덱스 유효성 검사
         /// </summary>
         /// <returns></returns>
         public bool CheckIndex(int index);
-    }
-
-    public interface INodeAvailable<T>
-    {
-        /// <summary>
-        /// 단일 검색
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        public AbstractNode<T> SearchNode(int index);
-
-        /// <summary>
-        /// Header null여부 검사
-        /// </summary>
-        /// <returns></returns>
-        public bool CheckIsHeaderNull(AbstractNode<T>? header);
     }
 }

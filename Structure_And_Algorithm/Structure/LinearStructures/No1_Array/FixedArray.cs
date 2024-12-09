@@ -20,10 +20,10 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
         #region Overrides
         public override void Insert(T newData, int index)
         {
-            if (lastIndex >= capacity - 1) return;
+            if (lastIndex >= length - 1) return;
 
-            index = index < 0 ? 0 :
-                    index >= capacity ? capacity - 1 : index;
+            if (index < 0) index = 0;
+            else if (index >= length) index = length - 1;
 
             for (int i = lastIndex; i >= index; i--)
             {
@@ -36,8 +36,8 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
 
         public override T Search(int index)
         {
-            index = index < 0 ? 0 :
-                    index >= capacity ? capacity - 1 : index;
+            if (index < 0) index = 0;
+            else if (index >= length) index = length - 1;
 
             return array[index];
         }
@@ -46,8 +46,9 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
         {
             if (lastIndex - 1 < 0) return default;
 
-            index = index < 0 ? 0 :
-                    index >= capacity ? capacity - 1 : index;
+            if (index < 0) index = 0;
+            else if (index >= length) index = length - 1;
+
             T deletedData = array[index];
 
             for (int i = index; i < lastIndex; i++)

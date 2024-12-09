@@ -15,21 +15,24 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
     public abstract class AbstractArray<T> : ILinearable<T>
     {
         #region Member Fields
-        protected int capacity;
-        protected int lastIndex;
         protected T[] array;
+        protected int length;
+        protected int lastIndex;
         #endregion
 
         #region Properties
-        public int Capacity { get => capacity; }
+        /// <summary>
+        /// 배열 길이
+        /// </summary>
+        public int Length { get => length; }
         #endregion
 
         #region Constructors
         public AbstractArray(int capacity)
-        {
-            this.capacity = capacity;
-            this.lastIndex = 0;
-            this.array = new T[capacity];
+        { 
+            array = new T[capacity];
+            length = capacity;
+            lastIndex = 0;
         }
 
         public AbstractArray(int capacity, T newData) : this(capacity)
@@ -42,9 +45,13 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
         public bool CheckIndex(int index)
         {
             if (index < 0)
+            {
                 throw new RuntimeException(ErrorCode.UnderflowedIndex, "인덱스가 0미만이 될 수 없습니다.");
-            else if (index >= capacity)
+            }
+            else if (index >= length)
+            {
                 throw new RuntimeException(ErrorCode.OverflowedIndex, "인덱스가 최대 길이 이상이 될 수 없습니다.");
+            }
 
             return true;
         }
@@ -110,7 +117,7 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
         /// </summary>
         public void Traversal()
         {
-            if(capacity == 0) return;
+            if(length == 0) return;
 
             int currentIndex = 0;
 

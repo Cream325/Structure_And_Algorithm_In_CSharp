@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using Structure_And_Algorithm.Structure.LinearStructures;
 using Structure_And_Algorithm.Structure.Nodes;
 using Structure_And_Algorithm.Structure.Utils;
 
@@ -23,10 +22,12 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         /// 헤드 노드
         /// </summary>
         public CustomLinkedListNode<T>? HeadNode { get => headNode; }
+
         /// <summary>
         /// 테일 노드
         /// </summary>
         public CustomLinkedListNode<T>? TailNode { get => tailNode; }
+
         /// <summary>
         /// 연결 리스트 길이
         /// </summary>
@@ -52,11 +53,29 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         /// 연결 리스트 - 단일 검색
         /// </summary>
         /// <param name="index"></param>
-        public T Search(int index)
+        public T? Search(int index)
         {
-            AbstractNode<T> searchedNode = SearchNode(index);
+            AbstractNode<T>? searchedNode = SearchNode(index);
             if (searchedNode != null)
+            {
                 return searchedNode.Data;
+            }
+
+            return default;
+        }
+
+        /// <summary>
+        /// 연결 리스트 - 단일 삭제
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public T? Delete(int index)
+        {
+            AbstractNode<T>? deletedNode = DeleteNode(index);
+            if (deletedNode != null)
+            {
+                return deletedNode.Data;
+            }
 
             return default;
         }
@@ -64,9 +83,13 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         public  bool CheckIndex(int index)
         {
             if (index < 0)
+            {
                 throw new RuntimeException(ErrorCode.UnderflowedIndex, "인덱스가 0미만이 될 수 없습니다.");
+            }
             else if (index > 1 && index >= length)
+            {
                 throw new RuntimeException(ErrorCode.OverflowedIndex, "인덱스가 최대 길이 이상이 될 수 없습니다.");
+            }
 
             return true;
         }
@@ -74,7 +97,9 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         public bool CheckIsHeaderNull(AbstractNode<T>? header)
         {
             if (header == null)
+            {
                 throw new RuntimeException(ErrorCode.NullOfHeader, "Head가 null이 될 수 없습니다.");
+            }
 
             return true;
         }
@@ -96,15 +121,15 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         /// 연결 리스트 - 단일 노드 검색
         /// </summary>
         /// <param name="index"></param>
-        public abstract AbstractNode<T> SearchNode(int index);
+        public abstract AbstractNode<T>? SearchNode(int index);
         #endregion
 
         #region Delete
         /// <summary>
-        /// 연결 리스트 - 단일 삭제
+        /// 연결 리스트 - 단일 노드 삭제
         /// </summary>
         /// <param name="index"></param>
-        public abstract T Delete(int index);
+        public abstract AbstractNode<T>? DeleteNode(int index);
         #endregion
 
         #endregion

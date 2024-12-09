@@ -21,13 +21,13 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
         {
             CheckIndex(index);
 
-            if (lastIndex + 1 == capacity)
+            if (lastIndex + 1 == length)
             {
                 Resize(array.Length * 2);
             }
 
-            for(int i = lastIndex; i >= index; i--)
-                {
+            for (int i = lastIndex; i >= index; i--)
+            {
                 array[i + 1] = array[i];
             }
 
@@ -50,9 +50,9 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
         {
             CheckIndex(index);
 
-            if (lastIndex - 1 < capacity / 2)
+            if (lastIndex - 1 < length / 2)
             {
-                Resize(capacity / 2);
+                Resize(length / 2);
             }
 
             T deletedData = array[index];
@@ -84,7 +84,7 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
             }
 
             array = newArray;
-            capacity = newSize;
+            length = newSize;
         }
         #endregion
     }

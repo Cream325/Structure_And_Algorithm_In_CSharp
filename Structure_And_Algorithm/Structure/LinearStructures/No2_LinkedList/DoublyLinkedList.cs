@@ -73,7 +73,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         #endregion
 
         #region Search
-        public override CustomLinkedListNode<T> SearchNode(int index)
+        public override CustomLinkedListNode<T>? SearchNode(int index)
         {
             CheckIsHeaderNull(headNode);
             CheckIndex(index);
@@ -102,7 +102,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         #endregion
 
         #region Delete
-        public override T Delete(int index)
+        public override CustomLinkedListNode<T>? DeleteNode(int index)
         {
             CheckIsHeaderNull(headNode);
             CheckIndex(index);
@@ -140,7 +140,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
             deletedNode = tempNode;
             length--;
 
-            return deletedNode.Data;
+            return deletedNode;
         }
         #endregion
 
