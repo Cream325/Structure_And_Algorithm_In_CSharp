@@ -1,6 +1,7 @@
 ﻿using Structure_And_Algorithm.Structure.LinearStructures.No1_Array;
 using Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList;
 using Structure_And_Algorithm.Structure.TestCodes.No3_Stack;
+using Structure_And_Algorithm.Structure.Utils;
 using System;
 
 namespace Structure_And_Algorithm
@@ -9,8 +10,8 @@ namespace Structure_And_Algorithm
     {
         public static void Main(string[] args)
         {
-            //LinkedListExample();
-            StackExample();
+            LinkedListExample();
+            //StackExample();
         }
 
         private static void LinkedListExample()

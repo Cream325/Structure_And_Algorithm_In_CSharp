@@ -12,19 +12,18 @@ namespace Structure_And_Algorithm.Structure.Nodes
         /// <summary>
         /// 이전 노드
         /// </summary>
-        public CustomLinkedListNode<T>? PreviousNode { get => (CustomLinkedListNode<T>?)nodeList[0]; set => nodeList[0] = value; }
+        public CustomLinkedListNode<T>? PreviousNode { get => (CustomLinkedListNode<T>?)nodes[0]; set => nodes[0] = value; }
 
         /// <summary>
         /// 다음 노드
         /// </summary>
-        public CustomLinkedListNode<T>? NextNode { get => (CustomLinkedListNode<T>?)nodeList[1]; set => nodeList[1] = value; }
+        public CustomLinkedListNode<T>? NextNode { get => (CustomLinkedListNode<T>?)nodes[1]; set => nodes[1] = value; }
         #endregion
 
         #region Constructors
-        public CustomLinkedListNode(T? data) : base(data)
+        public CustomLinkedListNode(T newData) : base(newData)
         {
-            nodeList.Add(null);
-            nodeList.Add(null);
+            nodes = new AbstractNode<T>[2];
         }
         #endregion
     }
