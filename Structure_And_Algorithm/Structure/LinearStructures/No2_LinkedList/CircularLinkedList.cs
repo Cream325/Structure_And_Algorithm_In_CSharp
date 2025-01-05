@@ -64,7 +64,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
                 else
                 {
                     // 일반적인 경우
-                    CustomLinkedListNode<T>? currentNode = SearchNode(index);
+                    CustomLinkedListNode<T>? currentNode = Search(index);
                     currentNode.PreviousNode.NextNode = newNode;
                     newNode.PreviousNode = currentNode.PreviousNode;
                     newNode.NextNode = currentNode;
@@ -79,7 +79,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         #endregion
 
         #region Search
-        public override CustomLinkedListNode<T>? SearchNode(int index)
+        public override CustomLinkedListNode<T>? Search(int index)
         {
             CheckIsHeaderNull(headNode);
             CheckIndex(index);
@@ -108,7 +108,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         #endregion
         
         #region Delete
-        public override CustomLinkedListNode<T>? DeleteNode(int index)
+        public override CustomLinkedListNode<T>? Delete(int index)
         {
             CheckIsHeaderNull(headNode);
             CheckIndex(index);
@@ -133,7 +133,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
             else
             {
                 // 인덱스가 length-1일 경우, 일반적인 경우
-                CustomLinkedListNode<T> currentNode = SearchNode(index);
+                CustomLinkedListNode<T> currentNode = Search(index);
                 tempNode = currentNode;
                 currentNode.PreviousNode.NextNode = currentNode.NextNode;
 

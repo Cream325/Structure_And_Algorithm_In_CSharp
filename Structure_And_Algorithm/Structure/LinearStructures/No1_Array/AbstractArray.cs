@@ -12,7 +12,7 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
     /// 배열 추상 클래스
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class AbstractArray<T> : ILinearable<T>
+    public abstract class AbstractArray<T> : IInsertable<T>, IFindable<T>
     {
         #region Member Fields
         protected T[] array;
@@ -73,7 +73,7 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
         /// 배열 - 단일 검색
         /// </summary>
         /// <param name="index"></param>
-        public abstract T Search(int index);
+        public abstract T? Search(int index);
         #endregion
 
         #region Delete
@@ -81,7 +81,7 @@ namespace Structure_And_Algorithm.Structure.LinearStructures.No1_Array
         /// 배열 - 단일 삭제
         /// </summary>
         /// <param name="index"></param>
-        public abstract T Delete(int index);
+        public abstract T? Delete(int index);
         #endregion
 
         #endregion

@@ -37,12 +37,12 @@ namespace Structure_And_Algorithm.Structure.Linear.Queue
 
         public override T? Peek()
         {
-            return linkedList.Search(0);
+            return linkedList.Search(0).Data;
         }
 
         public override T? Dequeue()
         {
-            return linkedList.Delete(0);
+            return linkedList.Delete(0).Data;
         }
         #endregion
     }

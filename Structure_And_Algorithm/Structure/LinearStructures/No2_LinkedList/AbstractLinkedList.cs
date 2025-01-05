@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using Structure_And_Algorithm.Structure.LinearStructures;
 using Structure_And_Algorithm.Structure.Nodes;
 using Structure_And_Algorithm.Structure.Utils;
 
@@ -9,7 +8,7 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
     /// 연결 리스트 추상 클래스
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class AbstractLinkedList<T> : ILinearable<T>, INodeAvailable<T>
+    public abstract class AbstractLinkedList<T> : IInsertable<T>, IFindable<CustomLinkedListNode<T>>
     {
         #region Member Fields
         protected CustomLinkedListNode<T>? headNode;
@@ -49,36 +48,6 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
         #endregion
 
         #region Overrides
-        /// <summary>
-        /// 연결 리스트 - 단일 검색
-        /// </summary>
-        /// <param name="index"></param>
-        public T? Search(int index)
-        {
-            AbstractNode<T>? searchedNode = SearchNode(index);
-            if (searchedNode != null)
-            {
-                return searchedNode.Data;
-            }
-
-            return default;
-        }
-
-        /// <summary>
-        /// 연결 리스트 - 단일 삭제
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        public T? Delete(int index)
-        {
-            AbstractNode<T>? deletedNode = DeleteNode(index);
-            if (deletedNode != null)
-            {
-                return deletedNode.Data;
-            }
-
-            return default;
-        }
 
         public  bool CheckIndex(int index)
         {
@@ -118,18 +87,18 @@ namespace Structure_And_Algorithm.Structure.Linear.LinkedList
 
         #region Search
         /// <summary>
-        /// 연결 리스트 - 단일 노드 검색
+        /// 연결 리스트 - 단일 검색
         /// </summary>
         /// <param name="index"></param>
-        public abstract AbstractNode<T>? SearchNode(int index);
+        public abstract CustomLinkedListNode<T>? Search(int index);
         #endregion
 
         #region Delete
         /// <summary>
-        /// 연결 리스트 - 단일 노드 삭제
+        /// 연결 리스트 - 단일 삭제
         /// </summary>
         /// <param name="index"></param>
-        public abstract AbstractNode<T>? DeleteNode(int index);
+        public abstract CustomLinkedListNode<T>? Delete(int index);
         #endregion
 
         #endregion

@@ -112,9 +112,12 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
 
         public void InsertTest(T newData, int index)
         {
+            bool isSuccessed = false;
+
             try
             {
                 list.Insert(newData, index);
+                isSuccessed = true;
 
                 if (index > 0 && index < list.Length - 1)
                     Console.WriteLine("-> Function 1-1. 인덱스가 0초과 Length-1미만일 때");
@@ -135,7 +138,7 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
             }
 
             Console.WriteLine($"인덱스: {index}");
-            Console.WriteLine($"삽입된 값: {newData}");
+            Console.WriteLine($"삽입된 값: {(isSuccessed ? newData : default)}");
         }
 
         public void SearchTest(int index)
@@ -144,7 +147,7 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
 
             try
             {
-                searchedNode = (CustomLinkedListNode<T>?)list.SearchNode(index);
+                searchedNode = (CustomLinkedListNode<T>?)list.Search(index);
 
                 if (index > 0 && index < list.Length - 1)
                     Console.WriteLine("-> Function 1-1. 인덱스가 0초과 Length-1미만일 때");
@@ -172,11 +175,11 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
 
         public void DeleteTest(int index)
         {
-            T? deletedData = default;
+            CustomLinkedListNode<T>? deletedNode = default;
 
             try
             {
-                deletedData = list.Delete(index);
+                deletedNode = list.Delete(index);
 
                 if (index > 0 && index < list.Length - 1)
                     Console.WriteLine("-> Function 1-1. 인덱스가 0초과 Length-1미만일 때");
@@ -200,7 +203,7 @@ namespace Structure_And_Algorithm.Structure.TestCodes.No2_LinkedList
             }
 
             Console.WriteLine($"인덱스: {index}");
-            Console.WriteLine($"삭제된 노드 값: {deletedData}");
+            Console.WriteLine($"삭제된 노드 값: {(deletedNode != null ? deletedNode.Data : default)}");
         }
 
         public void PrintTest()
